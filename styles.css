@@ -125,6 +125,9 @@ ol, ul { list-style: none; }
 .logo--contact { height: clamp(180px, 22vh, 320px); }
 .logo--divider { height: 60px; }
 
+/* Entradilla de la portada: nombre + oficio en la primera pantalla.
+   Sin esto el hero solo decía PORTAFOLIO y el visitante no sabía de quién. */
+.hero__kicker { position: relative; z-index: 1; margin-bottom: var(--space-3); }
 /* Palabra PORTAFOLIO de la portada (ocupa todo el ancho) */
 .hero--cover { align-items: center; align-content: center; justify-items: center; padding: var(--space-4); }
 /* El <h1> es el propio display: así la palabra visible no va aria-hidden
