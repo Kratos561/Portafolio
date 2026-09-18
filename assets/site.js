@@ -260,8 +260,8 @@
         figure.classList.add("video-fallo");
         figure.innerHTML =
           "<p>No se pudo cargar el reproductor aquí.<br>" +
-          "Si abriste la web con doble clic, usa <b>ABRIR-WEB.cmd</b> para verla " +
-          "en http://localhost: YouTube necesita un origen web.</p>" +
+          "Comprueba tu conexión. Si abriste esta web con doble clic desde tu PC, " +
+          "usa <b>ABRIR-WEB.cmd</b> en su lugar.</p>" +
           '<a class="btn" href="https://youtu.be/' + id + '" target="_blank" rel="noopener">Ver en YouTube &rarr;</a>';
       }, YT_AVISO_FALLO_MS);
     });
