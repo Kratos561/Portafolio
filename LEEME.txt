@@ -1,0 +1,442 @@
+================================================================
+PORTAFOLIO ISAAC LORENZO — AISAK 3D
+Documentación para continuar el trabajo (humano o agente)
+================================================================
+Idioma de todo el sitio: ESPAÑOL. No reintroducir textos en inglés
+(solo se conservan nombres propios: Blender, Premiere, etc.,
+títulos de videos y términos de industria como "reel").
+
+----------------------------------------------------------------
+1. CÓMO VER LA WEB (IMPORTANTE)
+----------------------------------------------------------------
+NO abrir con doble clic (protocolo file://). Los videos de YouTube
+incrustados fallan con "Error 153" sin un origen http/https válido.
+
+POR QUÉ: YouTube exige que la página que incrusta el reproductor envíe
+el header HTTP Referer (lo pide su "Required Minimum Functionality").
+Una página abierta con file:// no tiene origen, así que el navegador no
+envía Referer y YouTube responde "Error 153: Video player configuration
+error". No es un fallo del código de la web ni del iframe: es que
+file:// no puede identificarse. Con http://localhost sí funciona.
+
+FORMA FÁCIL (recomendada): doble clic en
+    ABRIR-WEB.cmd
+Levanta el servidor y abre el navegador en http://localhost:8000. Deja
+esa ventana abierta mientras navegas; al cerrarla se detiene el servidor.
+
+FORMA MANUAL:
+  1. Ejecutar:  powershell -ExecutionPolicy Bypass -File .\servidor-local.ps1
+     Opciones: -Port 8080 · -NoBrowser · -Root C:\otra\carpeta
+     (sin -Root sirve la carpeta donde está el script, se lance desde donde
+      se lance; con -NoBrowser no intenta abrir el navegador)
+  2. Abrir:     http://localhost:8000/index.html
+
+SI AUN ASÍ UN VIDEO NO CARGA: a los 8 segundos la tarjeta muestra un
+aviso con enlace directo a YouTube (clase .video-fallo en styles.css).
+Eso cubre los casos de "sin internet", red bloqueada o embed prohibido
+por el dueño del video, en vez de dejar un recuadro negro mudo.
+
+El servidor sirve la carpeta por HTTP/1.1 con MIME correcto (html, css,
+js, svg, jpg, png, webp, woff2, mp4...), con soporte de peticiones
+parciales (Range, responde 206), sin caché para el HTML, y una página
+404 propia. Si el puerto 8000 está ocupado, coge el siguiente libre y lo
+avisa. Al publicar en un hosting https (Netlify, Vercel, GitHub Pages)
+todo funciona sin el script.
+
+DETALLE TÉCNICO DEL SERVIDOR (por qué NO usa HttpListener):
+  El script escucha con System.Net.Sockets.TcpListener y habla HTTP/1.1
+  a mano. NO usa System.Net.HttpListener a propósito: en PowerShell 7
+  sobre .NET moderno su constructor puede lanzar
+  "PlatformNotSupportedException: Operación no permitida en esta
+  plataforma" (el feature switch de HttpListener desactivado), y entonces
+  el servidor no arranca nunca y los videos dan Error 153. TcpListener no
+  depende de HTTP.sys ni de permisos especiales.
+  Escucha SOLO en 127.0.0.1 (no se expone a la red local) y no toca el
+  registro de Windows, ni netsh, ni certificados, ni pide permisos de
+  administrador. Verificado: 200 con MIME correcto en html/css/js/webp/
+  png/jpg, 404 propio, Range -> 206 con Content-Range, y las rutas tipo
+  ../../Windows/win.ini rechazadas con 404 (no se puede salir de la
+  carpeta servida).
+
+----------------------------------------------------------------
+2. ESTRUCTURA DE ARCHIVOS
+----------------------------------------------------------------
+Portafolio/
+  index.html        Página principal (portada + sobre mí + puertas +
+                    selección + servicios + proceso + stats + contacto)
+  3d.html           Subpágina 02: galería Arte 3D (4 piezas P01–P04)
+  videos.html       Subpágina 03: galería Video (6 videos V01–V06)
+  styles.css        Estilo compartido por las 3 páginas (única fuente)
+  servidor-local.ps1 Servidor estático local (ver punto 1)
+  ABRIR-WEB.cmd     Lanzador de un clic: servidor + navegador (punto 1)
+  assets/site.js    Comportamiento compartido por las 3 páginas. Ver punto 13.
+  lab-aranido.html  Banco de pruebas de las técnicas arácnidas (noindex, no
+  lab-aranido-2.html  forma parte del sitio). Ver punto 14.
+  INFORME-ARANIDO.md  Investigación de referencias + hallazgos medidos.
+  diagnostico.html  Mide solapes de composición a 15 anchos (noindex).
+  LEEME.txt         Este archivo
+  assets/
+    logo.png        LOGO OFICIAL (176x361, ~55KB). Ver punto 5.
+    logo.svg        Recreador vectorial antiguo, YA NO SE USA (quedó de
+                    respaldo; ninguna página lo referencia).
+    cover-bg.jpg    Fondo de la portada (1536x2752, red neuronal
+                    blanca sobre negro), opacidad 35% por CSS.
+    animations.js   Animaciones GSAP compartidas. Ver punto 7.
+    portrait.jpg    Retrato de Isaac (577x1280, ~115KB). YA ESTÁ EN USO:
+                    el <img> del retrato está activo (no comentado).
+                    OJO: es 9:20, no 4:5. Ver punto 9.
+    web-*.png       Telarañas PNG transparentes (7): web-slate, web-door,
+                    web-feat3d, web-featvideo, web-services, web-contact,
+                    web-3dhero (esta última la usan 3d y videos, esta
+                    última espejada con .web--3dhero-l).
+                    Decorativas, van en secciones .has-web. Ver punto 4.
+    3d-*.webp       Piezas 3D reales (4): 3d-vintage-optics, 3d-red-breath,
+                    3d-volatile-assets, 3d-weapon-environment. Usadas en
+                    index (destacado) y 3d.html (galería completa).
+  ChatGPT Image...png  Original del logo subido por el usuario (respaldo,
+                    no se referencia; la copia en uso es assets/logo.png).
+  image.png_2K...jpeg  Original del fondo subido por el usuario (respaldo,
+                    no se referencia; la copia en uso es assets/cover-bg.jpg).
+  deepseek_html_20260916_5c71f4.html
+                    Primera versión de una sola página. RESPALDO: no tocar
+                    ni referenciar; el sitio real son index/3d/videos.
+  Portafolio.zip  Respaldo de una versión anterior (fuentes Bricolage /
+                    Instrument, sin telarañas ni piezas reales). NO tocar;
+                    la versión viva es esta carpeta.
+
+----------------------------------------------------------------
+3. ORDEN Y NUMERACIÓN (01 → 04, igual en nav y secciones)
+----------------------------------------------------------------
+  01 Sobre mí  → index.html#slate   (sección "01 / Perfil — Sobre mí")
+  02 Arte 3D   → 3d.html            (subpágina "02 / Render")
+  03 Video     → videos.html        (subpágina "03 / Video")
+  04 Contacto  → index.html#contact (sección "04 / Contacto")
+
+Orden de secciones en index.html (coincide con la numeración):
+  hero portada (#top) → sobre mí (#slate) → puertas 02/03 (.index-links)
+  → selección rápida (#selected) → servicios → marquee → proceso
+  → contacto (#contact) con footer.
+  NOTA: NO existe ninguna sección "stats"; el CSS que la estilaba se
+  eliminó por ser código muerto.
+El link activo del nav se marca por IntersectionObserver (solo los
+#slate y #contact en la principal; en subpáginas el activo es fijo).
+
+----------------------------------------------------------------
+4. SISTEMA VISUAL (no cambiar sin pedirlo)
+----------------------------------------------------------------
+Colores: negro #0A0A0A (fondo), tinta #141414, papel #F2EFE6 (texto),
+  rojo #E10600 (acento), rojo oscuro #7A0300.
+  ADEMÁS: --accent-text #FF4A3D, un rojo ACLARADO que se usa SOLO en
+  .label--accent (texto pequeño). Motivo: #E10600 sobre negro da 3,99:1
+  de contraste y no alcanza WCAG AA en tamaños pequeños; #FF4A3D da 5,6:1.
+  El rojo de marca #E10600 sigue intacto en bordes, bloques, hover y
+  texto grande. No cambiar uno por otro sin medir el contraste.
+Fuentes: Ethnocentric Rg regular (display, igual que el logo; vía
+  CDN https://fonts.cdnfonts.com/css/ethnocentric — solo existe en
+  peso 400, los 700 se sintetizan; Bricolage queda de respaldo),
+  Chakra Petch light italic (acentos; cuadrada y tecno como Ethnocentric),
+  JetBrains Mono (mono, Google).
+  Las 3 páginas llevan preconnect a fonts.googleapis/gstatic/cdnfonts y
+  un rel="preload" as="style" del CSS de Ethnocentric para que la fuente
+  del display no llegue tarde.
+Elementos fijos del estilo:
+  - Cursor personalizado (punto + etiqueta VER/ABRIR; oculto en táctil).
+    El cursor nativo SOLO se oculta si el JS vive: la regla es
+    html.js-on body { cursor:none } y la clase js-on va en el <html>.
+    Si el script fallara, el usuario conserva su cursor.
+  - Header fijo SOLO con el logo (sin texto), con sombreador: degradado
+    negro + blur de 12px y borde inferior al hacer scroll (.hdr--scrolled).
+    Se eliminó el antiguo mix-blend-mode: difference.
+  - La línea roja vertical de scroll (playhead) SE ELIMINÓ a petición.
+    Solo queda en el archivo de respaldo deepseek_*.html.
+  - Reveals por [data-reveal][data-from="up|right|mask"] con CSS; cuando
+    GSAP carga, él los controla (clase html.gsap-on desactiva las
+    transiciones CSS para no pelearse con los inline styles).
+  - Telarañas PNG decorativas (.web--slate/door/feat3d/featvideo/services/
+    contact/3dhero/3dhero-l) dentro de secciones .has-web; posicionadas por
+    esquinas con opacidad .45–.8 (bajan a .3 en móvil ≤900px). No interfieren:
+    el contenido va por encima (z-index). El header usa .hdr__mark (logo solo).
+    Las reglas .hdr__name, .strip*, .slot--*, .stats y .back/.note/.dot se
+    eliminaron por ser código muerto: no reintroducirlas.
+
+----------------------------------------------------------------
+5. LOGO (regla del dueño: NO modificarlo, solo cambiarle el tamaño)
+----------------------------------------------------------------
+Archivo en uso: assets/logo.png (176x361, vertical, fondo transparente).
+  REESCALADO, no rediseñado: el original era 876x1795 / 975KB y se redujo
+  a 176x361 / 55KB conservando el dibujo, la proporción y el nombre.
+  El original está guardado en .dsh-tmp/originales/logo.png (y en
+  "ChatGPT Image 15 sept 2026, 23_40_11.png", que pesa lo mismo y es el
+  mismo gráfico). Si se necesita más resolución, se reescala desde ahí.
+Solo se escala por CSS (.logo--header 60px, --hero, --divider 60px,
+--contact, .foot__logo 28px, fondos de tarjetas) con object-fit:contain.
+Favicon .png en las 3 páginas. Los <img> declaran width/height
+proporcionales (176x361) para que el navegador reserve el hueco correcto
+y no haya salto de layout; el CSS manda sobre el tamaño final.
+
+----------------------------------------------------------------
+6. PORTADA (hero de index.html, id="top", clase .hero--cover)
+----------------------------------------------------------------
+Contiene SOLO la palabra PORTAFOLIO a todo ancho (h1#cover-title con
+aria-label; spans internos aria-hidden para lectores de pantalla).
+  - .portafolio-word: display Ethnocentric, clamp(2rem, 10vw, 15rem).
+    En móvil ≤560px: clamp(1.1rem, min(9vw, calc((100vw - 2.5rem) / 7.6)), 3rem).
+    El min() es importante: 10 caracteres Ethnocentric ocupan ~7,6 veces el
+    tamaño de fuente, así que con 9vw a secas la palabra desbordaba el
+    viewport en pantallas de 320-360px. nowrap, centrada.
+    Primera mitad en contorno (text-stroke), segunda sólida, con
+    .wave-bar (barra roja vertical) detrás (.wave-stage).
+  - Fondo: assets/cover-bg.jpg a pantalla completa (object-fit:cover),
+    opacity .35, z-index 0; la palabra va en z-index 1.
+  - Animación (ver punto 7): respiración + brillo suave por letra,
+    inclinación 3D con el cursor y parallax con scroll.
+
+----------------------------------------------------------------
+7. ANIMACIONES GSAP (skills: gsap-core, gsap-timeline, gsap-scrolltrigger)
+----------------------------------------------------------------
+CDNs (cdnjs 3.12.5, antes del script inline, en las 3 páginas):
+  gsap.min.js + ScrollTrigger.min.js + assets/animations.js
+assets/animations.js contiene TRES contextos de gsap.matchMedia separados
+  a propósito (antes era uno solo con conditions y el reduce-motion dejaba
+  código inalcanzable):
+  1) "(prefers-reduced-motion: no-preference)" → TODO el movimiento:
+     PORTAFOLIO (respiración scale 1→1.015 + brillo suave por letra con
+     stagger yoyo infinito), logo flotante en subpáginas, parallax scrub
+     del hero, reveals [data-reveal] por lotes (ScrollTrigger.batch,
+     start "top 88%", once:true, stagger 0.12) con clip-path para mask,
+     marquee infinito y deriva del retrato.
+  2) "(hover: hover) and (pointer: fine)" → solo interacción de ratón:
+     inclinación 3D de PORTAFOLIO (quickTo rotationX/Y, clamp ±12/±10)
+     y botones .btn magnéticos. Sale temprano si hay reduce-motion.
+  3) "(prefers-reduced-motion: reduce)" → quita html.gsap-on, limpia los
+     inline styles de [data-reveal] (autoAlpha 1, clip-path abierto) y
+     refresca ScrollTrigger: nada queda oculto esperando un reveal.
+  NOTA: se eliminó la "timeline de entrada del hero con labels" porque
+  animaba .hero__meta / .hero__slate / .hero__credit, clases que no
+  existen en ninguna de las 3 páginas: era código sin efecto.
+  Al cargar fuentes/imágenes: ScrollTrigger.refresh() en window load.
+Reglas de las skills aplicadas: registerPlugin, defaults, camelCase y
+aliases de transform (x/y/scale/rotation/autoAlpha), eases documentados,
+matchMedia con prefers-reduced-motion (sin animación si se pide),
+sin scrub+toggleActions juntos, sin ScrollTrigger en tweens anidados.
+FALLBACK: si el CDN falla, los scripts inline (reveal por
+IntersectionObserver) y el CSS mantienen la web usable. Los reveals
+inline se desactivan solos si window.gsap+ScrollTrigger existen.
+
+----------------------------------------------------------------
+8. VIDEOS (videos.html: SOLO video + título, sin descripción)
+----------------------------------------------------------------
+Los 6 son YouTube del canal @Ekko-Sound, con patrón "fachada":
+miniatura hqdefault + botón ▶ que al clic inyecta el iframe con
+autoplay (así cargan rápido y reproducen DENTRO de la web).
+  V01 Milo J - 3 Pecado Despues ............ N8ENK1se66I
+  V02 Comercial de Comida .................. qLOa3IcbxlE
+  V03 Comercial Deportivo .................. jqgSZ3iCIGY
+  V04 Motion Graphics - Comercial de Nike .. 4--5J4b78jE
+  V05 Animacion de Meta .................... LELFhmCp2sA
+  V06 Comercial de Nike .................... JmmSd6xWtU4
+(Títulos verificados vía oEmbed de YouTube; son títulos propios, no
+traducir.) Cada tarjeta trae link "Ver en YouTube →" y "Siguiente".
+ATENCIÓN al tocar esta página: las 6 tarjetas llevan SOLO la clase
+project--bleed (se les quitó project--video). Esa clase generaba un botón
+▶ con ::after en la misma esquina donde ya está <span class="thumb-play">,
+así que se veían DOS botones encimados. El hover del botón lo da
+.thumb-btn:hover .thumb-play (antes apuntaba a un <a> que no existe).
+El iframe lleva referrerPolicy = "strict-origin-when-cross-origin" (lo
+que recomienda YouTube) y playsinline=1 para móvil. Si el reproductor no
+carga en 8 segundos, la tarjeta se convierte en .video-fallo (aviso +
+enlace directo): eso es lo que verás si abres la web con file://.
+El destacado de video de index.html (Comercial de Comida) tiene la misma
+fachada y el mismo script inline, así que también reproduce en la página
+y no solo enlaza a YouTube.
+En escritorio los videos van a 2 columnas (#moving) con V01 a ancho
+completo; ≤900px pasa a 1 columna.
+3d.html muestra las 4 piezas reales (3d-*.webp) con ficha y enlace a
+ArtStation; el destacado de index.html es Vintage Optics.
+
+----------------------------------------------------------------
+9. SOBRE MÍ CON FOTO (index.html#slate)
+----------------------------------------------------------------
+Grid retrato (4:5) + bio. La foto YA ESTÁ PUESTA (assets/portrait.jpg,
+<img> activo, 577x1280). El marcador "Tu foto aquí" solo aparece si el
+<img> no carga (CSS :has). Meta: Disciplina / Ubicación ("añade tu
+ciudad" pendiente) / Enfoque / Contacto.
+  OJO CON LA FOTO: el archivo es 9:20 (0,45), NO 4:5 (0,8). El contenedor
+  .portrait la fuerza a 4:5 con object-fit:cover + object-position:
+  center 22% (sesgado hacia arriba, que es donde está la cara), así que
+  se recorta arriba y abajo. Se ve bien, pero si quieres que no se
+  recorte nada, reemplaza assets/portrait.jpg por una foto en 4:5 real
+  (1200x1500) y actualiza el width/height del <img>.
+  Lo que NO hay que volver a hacer: declarar width/height que no
+  coincidan con el archivo (antes decía 1200x1500 y provocaba salto
+  de layout al cargar).
+Email de contacto actual: hello@isaaclorenzo.example (cambiar por el
+real en index/3d/videos, CTAs + footers). Hay además un canonical y
+og:url apuntando a https://aisak3d.example/ como marcador de posición:
+cámbialos por el dominio real al publicar. ArtStation real:
+https://www.artstation.com/isazz_jv (footer + fichas de piezas).
+
+----------------------------------------------------------------
+10. FOOTER (dentro de la sección contacto, en las 3 páginas)
+----------------------------------------------------------------
+Marca clicable (logo 28px + "Isaac Lorenzo — AISAK 3D", vuelve arriba),
+columnas Secciones y Contacto (email + YouTube →) con hover rojo, y
+barra inferior con © año automático (JS #year), etiqueta de página y
+"Volver arriba ↑" (usa #top; existe en los 3 heroes). Entra con reveal.
+
+----------------------------------------------------------------
+11. RESPONSIVE (escritorio intacto; todo bajo breakpoints en styles.css)
+----------------------------------------------------------------
+Bloque "RESPONSIVE" al final del CSS: variables compactas ≤720px,
+header compacto ≤640px (sin numeritos, con wrap de seguridad),
+titulares display con vw + hyphens ≤560px (portada con el min() del
+punto 6), extra ≤380px, y anti-desbordes (flex-wrap, overflow-wrap,
+max-width). Nuevos estilos deben seguir este patrón (media queries, no
+tocar base).
+
+REGLAS DE COMPOSICIÓN (por qué no se solapan título y logo):
+  - Ninguna rejilla usa `1fr` a secas: siempre `minmax(0, 1fr)`. Con
+    `1fr` la columna no puede encogerse por debajo de su palabra más
+    larga, así que un título display se sale de su celda y se monta
+    encima del logo (era el caso de "seleccionados"/"montajes" en
+    .chapter__head entre ~1000 y ~1300px de ancho).
+  - Los títulos largos llevan además min-width:0 y overflow-wrap:
+    break-word, como red de seguridad.
+  - .chapter__title se calibra con la propia columna entre 721 y
+    1100px con min(var(--step-4), (100vw - laterales - logo - hueco)/12,5)
+    (12,5 = ancho aproximado de "seleccionados" en Ethnocentric).
+  - El logo del hero de las subpáginas FLOTA solo a partir de 1101px;
+    por debajo entra en el flujo encima del titular. Su altura está
+    topada por alto Y por ancho (max-width:22vw) para que no crezca en
+    pantallas panorámicas, y el parallax de scroll anima el envoltorio
+    .hero__logo (no la imagen) con un recorrido corto (yPercent 8).
+  - El div del título en .chapter__head lleva overflow-wrap y el
+    logo de sección desaparece por debajo de 900px (el titular manda).
+  Si se añade una pieza nueva con título + logo en la misma fila, usar
+  minmax(0, 1fr) + min-width:0 y comprobar a 1920/1440/1280/1100/1024/
+  900/768/560/360 px.
+
+----------------------------------------------------------------
+12. NOTAS PARA OTRO AGENTE
+----------------------------------------------------------------
+- Idioma: todo en español. El lang="es" ya está en las 3 páginas.
+- La clase js-on va en el <html> de las 3 páginas y es la que permite
+  ocultar el cursor nativo (html.js-on body). No quitarla.
+- No reintroducir: playhead, mix-blend en header, textos en inglés,
+  referencias a assets/logo.svg, iframes directos de YouTube en el HTML,
+  clases .strip*/.slot--*/.stats/.back/.note/.dot/.hdr__name (muertas),
+  ni la clase project--video en las tarjetas de videos.html.
+- Orden de scripts al final del body: CDN gsap → ScrollTrigger →
+  assets/animations.js → script inline (header/reveal/cursor/año;
+  + fachada de videos en videos.html). Mantener ese orden.
+- Si se añaden [data-reveal], incluir siempre data-from="up|right|mask"
+  (los 3 existen y están verificados 1:1).
+- Servidor local requerido para probar videos (punto 1).
+- Peso: ya NO hay archivos de 1-3MB. Totales por página (2026):
+  index 2,28MB · 3d 1,43MB · videos 0,78MB. Las imágenes se
+  reescalaron manteniendo nombres y proporciones; los originales de
+  logo y telarañas están en .dsh-tmp/originales/. Si se añaden
+  imágenes nuevas, reescalarlas al tamaño real de uso (ninguna de las
+  decorativas se muestra a más de ~1000px) y comprimirlas antes.
+- Todas las <img> declaran width/height para evitar saltos de layout.
+
+----------------------------------------------------------------
+13. SISTEMA ARÁCNIDO Y COMPORTAMIENTO COMPARTIDO (nuevo)
+----------------------------------------------------------------
+assets/site.js  (244 líneas) — TODO el comportamiento común en un solo
+  archivo. Antes estaba copiado y pegado en el <script> en línea de las
+  3 páginas: cada arreglo había que hacerlo 3 veces y se desincronizaban.
+  Contiene, en este orden, y cada bloque solo se activa si encuentra su
+  elemento en la página:
+    1. Header con sombra al hacer scroll
+    2. Nav activo por IntersectionObserver (solo index)
+    3. Reveals de respaldo si GSAP no cargó
+    4. Cursor personalizado (limpia la etiqueta al salir)
+    5. Telaraña reactiva al cursor (.react) — 1 listener + rAF + lerp
+    6. Contador (.count) con respaldo si no hay @property
+    7. Reproductor de YouTube con fachada + aviso si no carga
+    8. Año del footer
+  ORDEN DE SCRIPTS (no cambiar): CDN gsap → ScrollTrigger →
+  assets/animations.js → assets/site.js
+
+Piezas arácnidas de CSS puro (sección "SISTEMA ARÁCNIDO" de styles.css),
+todas con los tokens de siempre, sin imágenes nuevas:
+  .web-css       telaraña dibujada con conic-gradient (radios) +
+                 repeating-radial-gradient (anillos) + mask radial.
+                 Parámetros: --hub --spokes --sw --rings --rw --tint
+  .react         la tela sigue al cursor abriendo su MÁSCARA (no la
+                 opacidad). OJO: si algún día se le pone opacity, se
+                 multiplica por el alfa de --web-line y la tela se vuelve
+                 invisible (pasó: 0,26 × 0,22 = 1,03:1 de contraste)
+  .dust / .fog   polvo en suspensión y niebla, solo gradientes
+  .grain         grano feTurbulence al 5% con mix-blend-mode: overlay
+  .thread-rule   hilo que se teje al pasar el ratón
+  .chapter/.contact/.about/.services/.process  la línea superior de cada
+                 sección es ahora ese hilo (::before gris + ::after rojo)
+  .tc / .rec     timecode tabular y punto REC parpadeante
+  .counter/.count  contador mecánico sin librería
+  .spec / .ruler / .balance / .smallcaps  micro-tipografía técnica
+
+ACCESIBILIDAD (medido, no estimado):
+  - --fg-muted es #8A8780 (5,52:1 sobre negro y 5,14:1 sobre #141414).
+    Antes #7d786e daba 4,51:1 sobre negro pero 4,20:1 sobre la tinta:
+    fallaba AA en todo el texto pequeño sobre tarjetas.
+  - --accent-text #FF4A3D (5,94:1) solo para etiquetas pequeñas.
+    El rojo de marca #E10600 (3,99:1) se queda para bordes y bloques.
+  - El botón .btn--solid lleva texto PAPEL sobre rojo (4,32:1): por eso
+    su texto va en negrita y a 1,45rem, que es el umbral de "texto grande"
+    (AA pide 3:1 y cumple). No bajar ese tamaño sin cambiar el color.
+  - --web-line va al 30% de papel: 2,27:1. Es el techo para una textura
+    que pasa por detrás de texto.
+  - El <h1> de la portada ya NO está aria-hidden: el texto accesible va
+    en un <span class="sr-only"> y la palabra gigante es la decorativa.
+  - El marquee se para con el ratón encima y con el foco de teclado
+    (WCAG 2.2.2), igual que el brillo de PORTAFOLIO.
+  - El contador escribe el número final con reduce-motion o sin
+    @property, y el ::after se retira para no pintar dos cifras.
+
+----------------------------------------------------------------
+14. CÓMO AÑADIR UNA PIEZA NUEVA (numeración automática)
+----------------------------------------------------------------
+Las etiquetas "P / 01", "V / 03" y el total "TOTAL 04 PIEZAS" los pone el
+CSS con contadores: NO hay que renumerar nada a mano.
+
+  <section id="render" class="chapter" style="--code:P">
+    <header class="chapter__head">…</header>
+    <ol class="projects">
+      <article class="project project--bleed" id="project-01"> … </article>
+      <article class="project project--split" id="project-02"> … </article>
+      <!-- una pieza nueva aquí: se renumera sola -->
+    </ol>
+  </section>
+
+Reglas:
+  - El tipo de pieza se declara UNA vez por bloque con style="--code:P"
+    (3D/planos) o "--code:V" (videos). Si se omite, cae a "P".
+  - El código del slate ("P01") lo escribe assets/site.js leyendo la
+    POSICIÓN real dentro de .projects. El hueco va así:
+        <span class="project__n"></span>
+  - La estrella de "destacada" (.project__star) sí es manual: es una
+    decisión editorial, no una posición en la lista.
+  - Los contadores solo funcionan si las piezas están DENTRO de
+    <ol class="projects">: es el contenedor que hace counter-reset.
+  - En videos.html la rejilla de 2 columnas vive ahora en .projects, así
+    que los selectores de #moving usan descendencia (espacio) y NO hijo
+    directo (>). Si se cambia a ">", el layout se rompe en silencio.
+
+----------------------------------------------------------------
+15. PENDIENTE / AVISOS
+----------------------------------------------------------------
+  - LICENCIA DE FUENTE: Ethnocentric (Typodermic) es gratuita para uso
+    personal y requiere licencia comercial. Este portafolio vende
+    servicios, así que hay que verificarlo antes de publicar. Si no se
+    licencia, la alternativa sin coste es quedarse con Bricolage
+    Grotesque, que ya está de respaldo en --font-display.
+  - lab-aranido.html y lab-aranido-2.html sirven para comparar técnicas
+    a ojo. Llevan <meta name="robots" content="noindex">, pero no
+    deberían subirse al hosting.
+  - diagnostic.html mide solapes a 15 anchos y, si el servidor expone
+    /save, devuelve la tabla. También sobra en producción.
+  - Los .md de investigación (INFORME-ARANIDO.md y compañía) son material
+    de trabajo: no forman parte del sitio y no deben subirse.
+  - .dsh-tmp/ guarda los originales de las imágenes antes de reescalarlas.
