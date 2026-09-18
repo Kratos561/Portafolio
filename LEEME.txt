@@ -290,9 +290,20 @@ barra inferior con © año automático (JS #year), etiqueta de página y
 Bloque "RESPONSIVE" al final del CSS: variables compactas ≤720px,
 header compacto ≤640px (sin numeritos, con wrap de seguridad),
 titulares display con vw + hyphens ≤560px (portada con el min() del
-punto 6), extra ≤380px, y anti-desbordes (flex-wrap, overflow-wrap,
+punto 6), extra ≤380px (logo 38px, links .62rem, wrap del header,
+metas a 7/10ch), y anti-desbordes (flex-wrap, overflow-wrap,
 max-width). Nuevos estilos deben seguir este patrón (media queries, no
 tocar base).
+  - Plataformas (todo capability-gated, escritorio intacto): táctil
+    (hover:none/pointer:coarse) con targets ≥44px y ▶ de 64px;
+    notch con viewport-fit=cover + safe-area bajo @supports;
+    paisaje corto (max-height:540px) con menos padding de hero;
+    ultra-panorámico (min-width:1700px) con bleed topado a 82vh;
+    svh con fallback vh; color-scheme:dark en :root.
+  - .projects::after (TOTAL) va en la franja de padding vacía
+    (top:var(--space-2)): a top:var(--space-5) caía sobre el Nº P01.
+  - .contact__head apila (1 columna) hasta 1100px, no solo 900px:
+    el titular step-5 partía palabras largas en tablet.
 
 REGLAS DE COMPOSICIÓN (por qué no se solapan título y logo):
   - Ninguna rejilla usa `1fr` a secas: siempre `minmax(0, 1fr)`. Con
