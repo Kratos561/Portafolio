@@ -9,6 +9,7 @@
 @property --n { syntax: '<integer>'; inherits: false; initial-value: 0; }
 
 :root {
+  color-scheme: dark;
   --color-black: #0A0A0A;
   --color-ink:   #141414;
   --color-paper: #F2EFE6;
@@ -241,11 +242,12 @@ ol, ul { list-style: none; }
 
 /* ============ HERO ============ */
 .hero {
+  min-height: 100vh;
   min-height: 100svh;
   padding: var(--space-8) var(--space-4) var(--space-5);
   display: grid; align-items: end; position: relative; overflow: hidden;
 }
-.hero--sub { min-height: 58svh; padding-top: calc(var(--space-5) + 5rem); }
+.hero--sub { min-height: 58vh; min-height: 58svh; padding-top: calc(var(--space-5) + 5rem); }
 .hero__grid { display: grid; grid-template-columns: minmax(0, 62%) minmax(0, 1fr); gap: var(--space-4); align-items: end; width: 100%; }
 /* Logo del hero: flota arriba a la derecha SOLO cuando hay sitio de sobra.
    Su tamaño estaba acoplado a la altura de la ventana (34vh), así que en
@@ -370,7 +372,9 @@ ol, ul { list-style: none; }
 .projects { position: relative; }
 .projects::after {
   content: 'TOTAL ' counter(proyecto, decimal-leading-zero) ' PIEZAS';
-  position: absolute; top: var(--space-5); right: var(--space-4);
+  /* top en la franja de padding vacía de la primera pieza (var(--space-5)):
+     a la altura del padding caía encima del "Nº P01" de la cabecera. */
+  position: absolute; top: var(--space-2); right: var(--space-4);
   font-family: var(--font-mono); font-size: var(--step--1);
   letter-spacing: var(--nav-tracking); text-transform: uppercase;
   color: var(--fg-muted); pointer-events: none;
@@ -554,6 +558,7 @@ ol, ul { list-style: none; }
 .contact__title .editorial { text-transform: none; color: var(--accent); }
 .contact__cta {
   display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; row-gap: .5rem;
   border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
   padding: var(--space-3) 0; font-family: var(--font-display); font-weight: 600;
   font-size: var(--step-2); letter-spacing: -0.02em;
@@ -600,7 +605,7 @@ ol, ul { list-style: none; }
 }
 .foot__top-btn { transition: color var(--dur-fast) var(--ease-out); }
 .foot__top-btn:hover { color: var(--accent); }
-@media (max-width: 900px) { .contact__head { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1100px) { .contact__head { grid-template-columns: minmax(0, 1fr); } }
 
 /* ============ VIDEOS: 2 COLUMNAS EN ESCRITORIO ============
    OJO: las piezas van dentro de <ol class="projects">, así que ya NO son
@@ -886,8 +891,15 @@ ol, ul { list-style: none; }
   .chapter__title { hyphens: auto; }
 }
 @media (max-width: 380px) {
-  .hdr__nav { gap: .7rem; }
-  .hdr__link { letter-spacing: .06em; }
+  /* A 320px logo + 4 enlaces solo caben si todo encoge: sin esto el nav
+     roza los 320px y cualquier letra ancha lo desborda. El wrap es la red. */
+  .hdr { flex-wrap: wrap; row-gap: .4rem; }
+  .logo--header { height: 38px; }
+  .hdr__nav { gap: .55rem; }
+  .hdr__link { font-size: .62rem; letter-spacing: .06em; }
+  /* Metas a una columna estrecha: la etiqueta no puede seguir a 8/12ch. */
+  .project__meta > div { grid-template-columns: 7ch minmax(0, 1fr); }
+  .about__meta > div { grid-template-columns: 10ch minmax(0, 1fr); }
 }
 
 /* --- Detalles anti-desborde --- */
@@ -900,6 +912,34 @@ ol, ul { list-style: none; }
 .thumb-embed iframe,
 .thumb-embed img {
   max-width: 100%;
+}
+
+/* --- Plataformas: táctil, notch, paisaje corto y ultra-panorámico ---
+   Todo mediado por capability (@media/@supports): el escritorio con
+   ratón no ve ningún cambio. */
+@media (hover: none), (pointer: coarse) {
+  /* En táctil no hay hover que revele el botón: el ▶ ya es grande. */
+  .hdr__link { padding: .55rem .25rem; }
+  .thumb-play { width: 64px; height: 64px; }
+  .project__next, .foot__nav a, .foot__contact a { padding-block: .35rem; }
+}
+/* Móviles con notch/isla: el header fijo y el pie respetan la zona segura.
+   Con @supports: si el navegador no conoce env(), manda la regla base. */
+@supports (padding: env(safe-area-inset-left)) {
+  .hdr {
+    padding-left: max(var(--space-3), env(safe-area-inset-left));
+    padding-right: max(var(--space-3), env(safe-area-inset-right));
+  }
+  .foot__bottom { padding-bottom: max(var(--space-3), env(safe-area-inset-bottom)); }
+}
+/* Paisaje corto (móvil girado, ~360px de alto): menos aire vertical. */
+@media (max-height: 540px) {
+  .hero { padding-top: var(--space-6); }
+}
+/* Ultra-panorámico (≥1700px): el bleed 16:9 a ancho completo daría piezas
+   de 1400px+ de alto; se topa la altura y el recorte lo hace cover. */
+@media (min-width: 1700px) {
+  .project--bleed .project__media { max-height: 82vh; }
 }
 
 /* ============ REVEAL ============ */
