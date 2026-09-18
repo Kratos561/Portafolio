@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es" class="js-on">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Isaac Lorenzo — AISAK 3D / Video</title>
+<meta name="description" content="Portafolio de Isaac Lorenzo (AISAK 3D): arte 3D y video. Subpáginas dedicadas a 3D y Video, sobre mí con foto y contacto." />
+<meta name="theme-color" content="#0A0A0A" />
+<meta name="author" content="Isaac Lorenzo" />
+<link rel="canonical" href="https://aisak3d.example/index.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Isaac Lorenzo — AISAK 3D" />
+<meta property="og:title" content="Isaac Lorenzo — AISAK 3D / Video" />
+<meta property="og:description" content="Arte 3D y video: modelado, materiales, iluminación y montaje. Portafolio de Isaac Lorenzo." />
+<meta property="og:image" content="https://aisak3d.example/assets/3d-vintage-optics.webp" />
+<meta property="og:image:alt" content="Vintage Optics — equipo óptico antiguo renderizado" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/png" href="assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.cdnfonts.com/css/ethnocentric" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,300..800&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.cdnfonts.com/css/ethnocentric" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="cursor" id="cursor" aria-hidden="true">
+  <div class="cursor__dot"></div>
+  <span class="cursor__label" id="cursorLabel">VER</span>
+</div>
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<!-- HEADER: logo superior izquierda -->
+<header class="hdr" id="hdr">
+  <a href="index.html" class="hdr__mark" aria-label="Isaac Lorenzo — inicio">
+    <img class="logo logo--header" src="assets/logo.png" alt="Logo AISAK 3D — Isaac Lorenzo" width="176" height="361" />
+  </a>
+  <nav aria-label="Navegación principal">
+    <ul class="hdr__nav">
+      <li><a class="hdr__link" href="#slate"><span class="hdr__idx" aria-hidden="true">01</span>Sobre mí</a></li>
+      <li><a class="hdr__link" href="3d.html"><span class="hdr__idx" aria-hidden="true">02</span>3D</a></li>
+      <li><a class="hdr__link" href="videos.html"><span class="hdr__idx" aria-hidden="true">03</span>Video</a></li>
+      <li><a class="hdr__link" href="#contact"><span class="hdr__idx" aria-hidden="true">04</span>Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- PORTADA: la palabra + telaraña reactiva al cursor (solo CSS) -->
+  <section id="top" class="hero hero--cover react grain" aria-labelledby="cover-title">
+    <span class="fog" aria-hidden="true"></span>
+    <span class="web-css" aria-hidden="true"></span>
+    <span class="dust" aria-hidden="true"></span>
+    <img class="cover-bg-img" src="assets/cover-bg.jpg" alt="" aria-hidden="true" width="1536" height="2752" decoding="async" fetchpriority="high" />
+    <h1 id="cover-title" class="cover-word display">
+      <span class="sr-only">Portafolio de Isaac Lorenzo — arte 3D y video</span>
+      <span class="wave-stage" aria-hidden="true">
+        <span class="wave-bar"></span>
+        <span class="portafolio-word" id="portafolioWord">PORTAFOLIO</span>
+      </span>
+    </h1>
+  </section>
+
+  <div class="thread-rule" aria-hidden="true"></div>
+
+  <!-- SOBRE MÍ (01, antes de las puertas 02/03) -->
+  <section id="slate" class="about has-web" aria-labelledby="about-title">
+    <img class="web web--slate" src="assets/web-slate.png" alt="" aria-hidden="true" width="512" height="768" loading="lazy" decoding="async" />
+    <p class="label label--accent">01 / Perfil — Sobre mí</p>
+    <h2 id="about-title" class="display about__title">Isaac Lorenzo crea imágenes <span class="editorial">renderizadas</span> y en <span class="editorial">movimiento</span>.</h2>
+
+    <div class="about__grid">
+      <figure data-reveal data-from="up">
+        <div class="portrait">
+          <img src="assets/portrait.jpg" alt="Retrato de Isaac Lorenzo" width="577" height="1280" loading="lazy" decoding="async" />
+          <div class="portrait__ph slot">
+            <span class="slot__label">Tu foto aquí — 4:5<br />guarda como<br />assets/portrait.jpg</span>
+            <span class="slot__corner" aria-hidden="true"></span>
+          </div>
+        </div>
+        <figcaption class="portrait__cap"><span>Fig. 01 — Retrato</span><span>4:5</span></figcaption>
+      </figure>
+
+      <div class="about__copy" data-reveal data-from="right">
+        <p class="about__lead">Soy Isaac, artista 3D y editor. <em>Mezclo objeto y montaje</em> para piezas claras y directas.</p>
+        <div class="about__text">
+          <p>Trabajo 3D (modelado, materiales, iluminación y render) y video (montaje, ritmo y color). Me interesa lo esencial: buena forma, buena luz y un corte a tiempo.</p>
+          <p>Disponible para freelance, colaboraciones y encargos. Si tienes un objeto que mostrar o una historia que montar, escríbeme y lo vemos en la sección de contacto.</p>
+        </div>
+        <dl class="about__meta">
+          <div><dt>Disciplina</dt><dd>Arte 3D / Video / Diseño visual</dd></div>
+          <div><dt>Ubicación</dt><dd>— (añade tu ciudad)</dd></div>
+          <div><dt>Enfoque</dt><dd>Hard-surface, materiales, montajes cinemáticos</dd></div>
+          <div><dt>Contacto</dt><dd><a href="mailto:hello@isaaclorenzo.example">hello@isaaclorenzo.example</a></dd></div>
+        </dl>
+        <div class="about__tags">
+          <span class="tag tag--red">Blender</span><span class="tag">After Effects</span><span class="tag">Premiere</span><span class="tag">DaVinci</span><span class="tag">Unreal</span>
+        </div>
+        <div class="about__actions">
+          <a class="btn btn--solid" href="#contact" data-cursor="open">Trabajemos juntos</a>
+          <a class="btn" href="3d.html" data-cursor="view">Ver arte 3D</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUERTAS A SUBPÁGINAS -->
+  <nav class="index-links" aria-label="Secciones del portfolio">
+    <a class="index-card" href="3d.html" data-cursor="view" data-reveal data-from="up">
+      <img class="web web--door" src="assets/web-door.png" alt="" aria-hidden="true" width="640" height="480" loading="lazy" decoding="async" />
+      <span class="index-card__num"><span class="label label--accent">02 / Render</span><span class="label">4 piezas →</span></span>
+      <h2 class="index-card__title display">Arte <span class="editorial">3D</span></h2>
+      <p class="index-card__desc">Objetos, materiales e iluminación. Destacada: Vintage Optics. Galería completa con fichas y enlaces a ArtStation.</p>
+      <span class="index-card__cta"><span class="label">Abrir subpágina</span><b>→</b></span>
+      <img class="index-card__bg" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" />
+    </a>
+    <a class="index-card" href="videos.html" data-cursor="view" data-reveal data-from="up">
+      <span class="index-card__num"><span class="label label--accent">03 / Video</span><span class="label">6 piezas →</span></span>
+      <h2 class="index-card__title display">Vi<span class="editorial">deos</span></h2>
+      <p class="index-card__desc">Montajes y piezas cinemáticas. Subpágina dedicada con los 6 videos.</p>
+      <span class="index-card__cta"><span class="label">Abrir subpágina</span><b>→</b></span>
+      <img class="index-card__bg" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" />
+    </a>
+  </nav>
+
+  <!-- SEPARADOR: tira de película con la ficha técnica del taller -->
+  <div class="filmstrip" aria-hidden="true">
+    <div class="filmstrip__tira">
+      <span>AISAK 3D</span><span>Blender · Cycles</span><span>After Effects · DaVinci</span><span><b>24 fps</b></span><span>España</span>
+    </div>
+  </div>
+
+  <!-- SELECCIÓN RÁPIDA -->
+  <section id="selected" class="chapter" aria-labelledby="selected-title">
+    <header class="chapter__head">
+      <div>
+        <p class="label label--accent">Selección / Vista previa</p>
+        <h2 id="selected-title" class="display chapter__title">Una mirada <span class="editorial">rápida</span></h2>
+      </div>
+      <img class="logo logo--divider chapter__logo" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" />
+    </header>
+
+    <ol class="projects" style="--code:P">
+<article class="project project--bleed" data-reveal data-from="mask">
+      <img class="web web--feat3d" src="assets/web-feat3d.png" alt="" aria-hidden="true" width="800" height="343" loading="lazy" decoding="async" />
+      <header class="project__head"><div class="project__index"><span class="label"><span class="project__star" aria-hidden="true">★ </span>ARTE 3D — destacado</span></div><span class="project__tc"><span class="rec">Destacada</span><span class="label tc">01 / 04</span></span></header>
+      <h3 class="project__title display">Vintage Optics</h3>
+      <figure class="project__media">
+        <img src="assets/3d-vintage-optics.webp" alt="Vintage Optics — equipo óptico antiguo en entorno deteriorado" width="1920" height="1242" loading="lazy" decoding="async" />
+      </figure>
+      <div class="project__body">
+        <dl class="project__meta">
+          <div><dt>Año</dt><dd>2026</dd></div>
+          <div><dt>Rol</dt><dd>Modelado / Materiales / Luz</dd></div>
+          <div><dt>Herramientas</dt><dd>Blender / Cycles</dd></div>
+        </dl>
+        <p class="project__desc">Colección de equipo óptico antiguo en un entorno deteriorado. Realismo de materiales, oxidación e iluminación atmosférica. <a href="https://www.artstation.com/artwork/P6lDao" target="_blank" rel="noopener">Ver en ArtStation →</a></p>
+      </div>
+      <footer class="project__foot">
+        <a class="project__next" href="3d.html" data-cursor="view"><span class="label">Ver todo</span><span class="project__next-name">Arte 3D →</span></a>
+        <span class="label">Nº <span class="project__n"></span></span>
+      </footer>
+    </article>
+
+    <article class="project project--strip project--video" data-reveal data-from="mask">
+      <img class="web web--featvideo" src="assets/web-featvideo.png" alt="" aria-hidden="true" width="800" height="450" loading="lazy" decoding="async" />
+      <header class="project__head"><div class="project__index"><span class="label"><span class="project__star" aria-hidden="true">★ </span>Video — destacado</span></div><span class="project__tc"><span class="rec">Destacada</span><span class="label tc">16:9 · 24 fps</span></span></header>
+      <h3 class="project__title display">Comercial de Comida</h3>
+      <figure class="project__media thumb-embed" data-yt="qLOa3IcbxlE" data-title="Comercial de Comida"><button class="thumb-btn" data-yt="qLOa3IcbxlE" data-title="Comercial de Comida" data-cursor="view" aria-label="Reproducir Comercial de Comida aquí"><img src="https://i.ytimg.com/vi/qLOa3IcbxlE/hqdefault.jpg" alt="Fotograma del Comercial de Comida" loading="lazy" decoding="async" width="480" height="360" /><span class="thumb-play" aria-hidden="true">▶</span></button></figure>
+      <div class="project__body">
+        <dl class="project__meta">
+          <div><dt>Pieza</dt><dd>Comercial de Comida</dd></div>
+          <div><dt>Enlace</dt><dd><a href="https://youtu.be/qLOa3IcbxlE" target="_blank" rel="noopener">Ver en YouTube →</a></dd></div>
+        </dl>
+        <p class="project__desc">Comercial de comida: ritmo, montaje y color. Pieza destacada de video.</p>
+      </div>
+      <footer class="project__foot">
+        <a class="project__next" href="videos.html#video-02" data-cursor="view"><span class="label">Ver todo</span><span class="project__next-name">Videos →</span></a>
+        <span class="label">Nº <span class="project__n"></span></span>
+      </footer>
+    </article>
+  </ol>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="services has-web" aria-labelledby="services-title">
+    <img class="web web--services" src="assets/web-services.png" alt="" aria-hidden="true" width="1280" height="480" loading="lazy" decoding="async" />
+    <p class="label label--accent">Qué hago</p>
+    <h2 id="services-title" class="display chapter__title">Servi<span class="editorial">cios</span></h2>
+    <div class="services__grid">
+      <div class="service" data-reveal data-from="up">
+        <span class="service__num"><span class="label label--accent">S/01</span><span class="label">3D</span></span>
+        <h3>Arte 3D</h3>
+        <p>Modelado hard-surface, UVs limpias, materiales PBR e iluminación para fotogramas que aguantan pantalla grande.</p>
+        <ul><li>Modelado</li><li>Materiales</li><li>Iluminación / Render</li></ul>
+      </div>
+      <div class="service" data-reveal data-from="up">
+        <span class="service__num"><span class="label label--accent">S/02</span><span class="label">Video</span></span>
+        <h3>Video y montaje</h3>
+        <p>Montaje con ritmo, sincronía de sonido básica, títulos y color. Del bruto al corte final listo para publicar.</p>
+        <ul><li>Montaje</li><li>Color</li><li>Títulos animados</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <span>Blender <b>●</b></span><span>Cycles <b>●</b></span><span>After Effects <b>●</b></span><span>Premiere <b>●</b></span><span>DaVinci Resolve <b>●</b></span><span>Unreal <b>●</b></span><span>Photoshop <b>●</b></span>
+  </div>
+
+  <!-- DATOS (contador sin librería: @property + counter en CSS) -->
+  <section class="chapter" aria-labelledby="datos-title">
+    <div class="chapter__head">
+      <div>
+        <p class="label label--accent">En números</p>
+        <h2 id="datos-title" class="display chapter__title">El <span class="editorial">taller</span></h2>
+        <p class="chapter__desc">Todo lo publicado en esta web, contado. Se actualiza con las piezas que se suben.</p>
+      </div>
+      <img class="logo logo--divider chapter__logo" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" />
+    </div>
+    <div class="counter">
+      <div class="count" style="--target:4"><span class="count__n"><span class="sr-only">4</span></span><span class="count__k">Piezas 3D</span></div>
+      <div class="count" style="--target:6"><span class="count__n"><span class="sr-only">6</span></span><span class="count__k">Piezas de video</span></div>
+      <div class="count" style="--target:10"><span class="count__n"><span class="sr-only">10</span></span><span class="count__k">Trabajos publicados</span></div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="process" aria-labelledby="process-title">
+    <p class="label label--accent">Cómo trabajo</p>
+    <h2 id="process-title" class="display chapter__title">Pro<span class="editorial">ceso</span></h2>
+    <ol class="process__list">
+      <li class="step" data-reveal data-from="up"><span class="label label--accent">01</span><h3>Encargo</h3><p>Objetivo, referencias y formato de entrega. Sin vueltas.</p></li>
+      <li class="step" data-reveal data-from="up"><span class="label label--accent">02</span><h3>Concepto</h3><p>Tablero de referencias + previsualización / animática para validar antes de producir.</p></li>
+      <li class="step" data-reveal data-from="up"><span class="label label--accent">03</span><h3>Producción</h3><p>Modelado / render o montaje con revisiones marcadas por código de tiempo.</p></li>
+      <li class="step" data-reveal data-from="up"><span class="label label--accent">04</span><h3>Entrega</h3><p>Máster + versiones vertical / portada. Archivos ordenados.</p></li>
+    </ol>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contact" class="contact has-web" aria-labelledby="contact-title">
+    <img class="web web--contact" src="assets/web-contact.png" alt="" aria-hidden="true" width="640" height="640" loading="lazy" decoding="async" />
+    <p class="label label--accent">04 / Contacto</p>
+    <div class="contact__head">
+      <h2 id="contact-title" class="contact__title display">Inicia una<br /><span class="editorial">conversación.</span></h2>
+      <img class="logo logo--contact" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" />
+    </div>
+    <a class="contact__cta" href="mailto:hello@isaaclorenzo.example" data-cursor="open">
+      <span>Escríbele a Isaac</span><span class="contact__arrow" aria-hidden="true">→</span>
+    </a>
+    <footer class="foot" data-reveal data-from="up">
+      <div class="foot__top">
+        <a class="foot__brand" href="#top" aria-label="Isaac Lorenzo — volver arriba">
+          <img class="foot__logo" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" />
+          <span>Isaac Lorenzo <i>— AISAK 3D</i></span>
+        </a>
+        <nav class="foot__nav" aria-label="Secciones">
+          <span class="label label--accent">Secciones</span>
+          <a href="#slate">Sobre mí</a>
+          <a href="3d.html">Arte 3D</a>
+          <a href="videos.html">Videos</a>
+          <a href="#contact">Contacto</a>
+        </nav>
+        <div class="foot__contact">
+          <span class="label label--accent">Contacto</span>
+          <a href="mailto:hello@isaaclorenzo.example">hello@isaaclorenzo.example</a>
+          <a href="https://www.artstation.com/isazz_jv" target="_blank" rel="noopener">ArtStation →</a>
+          <a href="https://www.youtube.com/@Ekko-Sound" target="_blank" rel="noopener">YouTube →</a>
+        </div>
+      </div>
+      <div class="foot__bottom">
+        <span>© <span id="year"></span> Isaac Lorenzo</span>
+        <span class="label">3D / Video / Diseño visual</span>
+        <a class="foot__top-btn" href="#top" data-cursor="view">Volver arriba ↑</a>
+      </div>
+    </footer>
+  </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="assets/animations.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
