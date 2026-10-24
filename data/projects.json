@@ -150,11 +150,11 @@
   ],
   "profile": {
     "photo": {
-      "src": "assets/portrait.jpg",
-      "width": 577,
-      "height": 1280,
-      "focus": 30,
-      "hidden": true
+      "src": "assets/profile/foto-mvlxwog3.webp",
+      "width": 1400,
+      "height": 3104,
+      "focus": 31,
+      "hidden": false
     }
   }
 }
