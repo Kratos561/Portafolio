@@ -147,5 +147,14 @@
       "tags": [],
       "youtube": "JmmSd6xWtU4"
     }
-  ]
+  ],
+  "profile": {
+    "photo": {
+      "src": "assets/portrait.jpg",
+      "width": 577,
+      "height": 1280,
+      "focus": 30,
+      "hidden": true
+    }
+  }
 }
