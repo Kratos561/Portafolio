@@ -8,8 +8,18 @@
    ============================================================ */
 (function () {
   'use strict';
-  const OWNER = 'Kratos561';
-  const REPO = 'Portafolio';
+  // Repositorio de la web, deducido de la dirección en GitHub Pages:
+  // usuario.github.io → usuario/usuario.github.io · usuario.github.io/repo/ → usuario/repo.
+  // Así la web sigue funcionando aunque cambie el nombre de usuario o del repositorio.
+  const SITE = (function () {
+    const m = location.hostname.match(/^([a-z0-9-]+)\.github\.io$/i);
+    if (!m) return { owner: 'isaaclorenzo', repo: 'isaaclorenzo.github.io' }; // local
+    const owner = m[1].toLowerCase();
+    const seg = location.pathname.split('/')[1] || '';
+    return { owner, repo: seg && !/\.html?$/i.test(seg) ? seg : owner + '.github.io' };
+  })();
+  const OWNER = SITE.owner; // el panel solo deja entrar a esta cuenta
+  const REPO = SITE.repo;
   const BRANCH = 'main';
   const DATA_PATH = 'data/projects.json';
   const IMG_DIR = 'assets/projects/';

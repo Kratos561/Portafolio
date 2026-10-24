@@ -15,7 +15,10 @@ proyectos (data/projects.json) no cargan.
   powershell -ExecutionPolicy Bypass -File .\servidor-local.ps1
   y abrir http://localhost:8000/
 Publicado con GitHub Pages desde la rama main del repo
-github.com/Kratos561/Portafolio (versión anterior en la rama version-anterior).
+github.com/isaaclorenzo/isaaclorenzo.github.io → https://isaaclorenzo.github.io
+(versión anterior en la rama version-anterior). El repositorio se
+deduce de la dirección (SITE en projects.js y admin.js): si cambias el
+usuario o el repositorio, solo hay que actualizar canonical/og:url/og:image.
 Al publicar, NO subir: _respaldo-v1/, deepseek_html_*.html, los
 originales "ChatGPT Image...png" e "image.png_2K...jpeg", .claude/.
 
@@ -27,7 +30,7 @@ lleva noindex; solo el dueño la conoce).
   1. Entrar con un token de GitHub "fine-grained":
      Repository access → Only select repositories → Portafolio
      Permissions → Contents: Read and write
-     El panel solo deja entrar a la cuenta Kratos561.
+     El panel solo deja entrar a la cuenta dueña del repositorio (isaaclorenzo).
   2. "Nuevo proyecto": Arte 3D (sube una imagen: se convierte a WebP y
      se reduce a 2400 px) o Video (pega el enlace de YouTube: el título
      se rellena solo). Campos: título, descripción, categoría, año,
@@ -139,7 +142,7 @@ Dos SVG (detrás y delante de las letras) redibujados en cada frame:
 - CACHÉ: GitHub Pages deja CSS/JS 10 min en el navegador. Al cambiar
   styles.css o cualquier assets/*.js, sube el número ?v=N en TODAS las
   páginas (index, videos, 3d, admin) para que se descargue de nuevo.
-  Versión actual: ?v=10.
+  Versión actual: ?v=11.
 - Pendiente del dueño: ciudad (fila comentada en .facts de index.html).
 - Compartir: assets/og-portada.jpg (1200x630, captura de la portada
   PORTAFOLIO) en og:image de las 3 páginas. Si cambia la portada, vuelve

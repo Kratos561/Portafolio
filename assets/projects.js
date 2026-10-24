@@ -18,7 +18,17 @@
 (function () {
   'use strict';
   const DATA_URL = 'data/projects.json';
-  const REPO = 'Kratos561/Portafolio';
+  // Repositorio de la web, deducido de la dirección en GitHub Pages:
+  // usuario.github.io → usuario/usuario.github.io · usuario.github.io/repo/ → usuario/repo.
+  // Así la web sigue funcionando aunque cambie el nombre de usuario o del repositorio.
+  const SITE = (function () {
+    const m = location.hostname.match(/^([a-z0-9-]+)\.github\.io$/i);
+    if (!m) return { owner: 'isaaclorenzo', repo: 'isaaclorenzo.github.io' }; // local
+    const owner = m[1].toLowerCase();
+    const seg = location.pathname.split('/')[1] || '';
+    return { owner, repo: seg && !/\.html?$/i.test(seg) ? seg : owner + '.github.io' };
+  })();
+  const REPO = SITE.owner + '/' + SITE.repo;
   const API_URL = 'https://api.github.com/repos/' + REPO + '/contents/' + DATA_URL + '?ref=main';
   const RAW_BASE = 'https://raw.githubusercontent.com/' + REPO + '/main/';
   const isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
