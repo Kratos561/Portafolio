@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow, noarchive" />
 <meta name="referrer" content="no-referrer" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://i.ytimg.com https://avatars.githubusercontent.com; connect-src 'self' https://api.github.com https://www.youtube.com; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://i.ytimg.com https://avatars.githubusercontent.com https://raw.githubusercontent.com; connect-src 'self' https://api.github.com https://www.youtube.com; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
 <title>Panel — AISAK 3D</title>
 <meta name="theme-color" content="#050505" />
 <link rel="icon" type="image/png" href="assets/favicon.png" />
@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=block" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=6" />
-<link rel="stylesheet" href="assets/admin.css?v=6" />
+<link rel="stylesheet" href="styles.css?v=7" />
+<link rel="stylesheet" href="assets/admin.css?v=7" />
 </head>
 <body class="admin">
 
@@ -77,9 +77,24 @@
     <button class="atab" role="tab" type="button" data-tab="3d" aria-selected="true">Arte 3D <span data-tabcount="3d">0</span></button>
     <button class="atab" role="tab" type="button" data-tab="video" aria-selected="false">Video <span data-tabcount="video">0</span></button>
     <button class="atab" role="tab" type="button" data-tab="featured" aria-selected="false">Destacado <span data-tabcount="featured">0</span></button>
+    <button class="atab" role="tab" type="button" data-tab="profile" aria-selected="false">Tu foto</button>
   </div>
   <p class="ahint" id="tabHint"></p>
   <ol class="alist" id="list" aria-live="polite"></ol>
+  <section class="aprofile" id="profileView" aria-label="Tu foto" hidden>
+    <div class="aprofile__frame"><img id="profileImg" src="data:," alt="Vista previa de tu foto tal como se verá en la web" /></div>
+    <div class="aprofile__side">
+      <h2 class="aprofile__title">Foto de «Sobre mí»</h2>
+      <p class="aprofile__lead">Así se verá en la página de inicio. Sube una foto vertical; se convierte a WebP y se reduce a 1400 px de ancho como máximo.</p>
+      <label class="btn btn--red aprofile__pick"><input type="file" id="photoInput" accept="image/png,image/jpeg,image/webp,image/avif" /><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg>Elegir foto nueva</label>
+      <div class="field">
+        <label for="focusInput">Encuadre vertical <span id="focusVal"></span></label>
+        <input type="range" id="focusInput" min="0" max="100" step="1" />
+        <p class="field__note">Arrastra para decidir qué parte de la foto se ve: 0 % arriba, 100 % abajo.</p>
+      </div>
+      <p class="field__note" id="profileInfo"></p>
+    </div>
+  </section>
 </main>
 
 <!-- BARRA DE PUBLICACIÓN -->
@@ -167,6 +182,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-<script src="assets/admin.js?v=6" defer></script>
+<script src="assets/admin.js?v=7" defer></script>
 </body>
 </html>

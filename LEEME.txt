@@ -33,6 +33,9 @@ lleva noindex; solo el dueño la conoce).
      se rellena solo). Campos: título, descripción, categoría, año,
      herramientas, etiquetas, enlace externo, "Destacado".
   3. Ordenar con las flechas, destacar con la estrella, editar o borrar.
+     Pestaña "Tu foto": subir una foto nueva para «Sobre mí» y ajustar
+     el encuadre vertical (se guarda en data/projects.json → profile.photo;
+     las fotos subidas van a assets/profile/).
   4. "Publicar en la web": hace UN commit en main con la imagen y
      data/projects.json. Se ve AL INSTANTE: la web lee los proyectos de
      la API de GitHub y, mientras GitHub Pages copia la imagen nueva
@@ -135,6 +138,8 @@ Dos SVG (detrás y delante de las letras) redibujados en cada frame:
 - CACHÉ: GitHub Pages deja CSS/JS 10 min en el navegador. Al cambiar
   styles.css o cualquier assets/*.js, sube el número ?v=N en TODAS las
   páginas (index, videos, 3d, admin) para que se descargue de nuevo.
-  Versión actual: ?v=6.
-- Pendiente del dueño: ciudad (fila comentada en .facts de index.html)
-  y og:image con URL absoluta.
+  Versión actual: ?v=7.
+- Pendiente del dueño: ciudad (fila comentada en .facts de index.html).
+- Compartir: assets/og.jpg (1200x630) en og:image de las 3 páginas.
+- Herramientas mostradas: Blender, After Effects, Premiere, Photoshop,
+  Illustrator (lista en .tools y ticker de index.html).

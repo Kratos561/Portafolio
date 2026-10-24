@@ -72,7 +72,8 @@
   }
   function normalize(d) {
     d = d && typeof d === 'object' ? d : {};
-    return { version: d.version || 1, featured: Array.isArray(d.featured) ? d.featured : [], projects: Array.isArray(d.projects) ? d.projects : [] };
+    // Conserva cualquier otro campo (p. ej. profile) para no perderlo al publicar
+    return Object.assign({}, d, { version: d.version || 1, featured: Array.isArray(d.featured) ? d.featured : [], projects: Array.isArray(d.projects) ? d.projects : [] });
   }
 
   /* ---------- Vistas ---------- */
@@ -141,7 +142,7 @@
 
   /* ---------- Estado ---------- */
   const isDirty = () => !!data && !!remote && JSON.stringify(serialize()) !== JSON.stringify(normalize(JSON.parse(remote.json)));
-  const serialize = () => ({ version: data.version, featured: data.featured.filter((id) => data.projects.some((p) => p.id === id)), projects: data.projects });
+  const serialize = () => Object.assign({}, data, { featured: data.featured.filter((id) => data.projects.some((p) => p.id === id)), projects: data.projects });
   const byId = (id) => data.projects.find((p) => p.id === id);
   const sectionList = (s) => data.projects.filter((p) => p.section === s);
   const isFeatured = (id) => data.featured.includes(id);
@@ -158,9 +159,15 @@
       n.textContent = k === 'featured' ? serialize().featured.length : sectionList(k).length;
     });
     $$('.atab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
-    $('#tabHint').textContent = tab === 'featured'
-      ? 'Orden en que aparecen en «Destacado» de la página de inicio. Marca la estrella en cualquier proyecto para añadirlo.'
-      : 'El orden de la lista es el orden en la web. El primero se muestra a lo ancho.';
+    const isProfile = tab === 'profile';
+    $('#list').hidden = isProfile;
+    $('#profileView').hidden = !isProfile;
+    $('#tabHint').textContent = isProfile
+      ? 'Tu foto aparece en «Sobre mí» de la página de inicio, recortada en vertical (4:5).'
+      : tab === 'featured'
+        ? 'Orden en que aparecen en «Destacado» de la página de inicio. Marca la estrella en cualquier proyecto para añadirlo.'
+        : 'El orden de la lista es el orden de la rueda en la web: el primero es el que aparece al frente.';
+    if (isProfile) renderProfile();
 
     const items = tab === 'featured' ? serialize().featured.map(byId).filter(Boolean) : sectionList(tab);
     const list = $('#list');
@@ -238,6 +245,48 @@
     if (again && !again.disabled) again.focus();
   });
 
+  /* ---------- Tu foto (data.profile.photo) ---------- */
+  const PROFILE_DIR = 'assets/profile/';
+  const DEFAULT_PHOTO = { src: 'assets/portrait.jpg', width: 577, height: 1280, focus: 30 };
+  const photoOf = () => Object.assign({}, DEFAULT_PHOTO, (data.profile && data.profile.photo) || {});
+  function renderProfile() {
+    const ph = photoOf();
+    const pend = pendingImages[ph.src];
+    const img = $('#profileImg');
+    const src = pend ? pend.url : ph.src;
+    if (img.getAttribute('src') !== src) img.src = src;
+    img.style.objectPosition = '50% ' + ph.focus + '%';
+    $('#focusInput').value = ph.focus;
+    $('#focusVal').textContent = ph.focus + ' %';
+    $('#profileInfo').textContent = (ph.width && ph.height ? ph.width + ' × ' + ph.height + ' px' : '') + (pend ? ' · foto nueva, sin publicar' : '');
+  }
+  function setPhoto(patch, msg) {
+    data.profile = Object.assign({}, data.profile || {}, { photo: Object.assign(photoOf(), patch) });
+    note(msg);
+    render();
+  }
+  $('#photoInput').addEventListener('change', async () => {
+    const file = $('#photoInput').files[0];
+    if (!file) return;
+    $('#profileInfo').textContent = 'Procesando…';
+    try {
+      const im = await processImage(file, 1400);
+      const p = PROFILE_DIR + 'foto-' + Date.now().toString(36) + '.' + im.ext;
+      pendingImages[p] = { base64: im.base64, url: im.url };
+      setPhoto({ src: p, width: im.width, height: im.height }, 'cambia la foto');
+      toast('Foto lista. Ajusta el encuadre y pulsa «Publicar en la web».');
+    } catch (err) {
+      $('#profileInfo').textContent = err.message;
+    }
+    $('#photoInput').value = '';
+  });
+  $('#focusInput').addEventListener('input', () => {
+    const v = +$('#focusInput').value;
+    $('#profileImg').style.objectPosition = '50% ' + v + '%';
+    $('#focusVal').textContent = v + ' %';
+  });
+  $('#focusInput').addEventListener('change', () => setPhoto({ focus: +$('#focusInput').value }, 'ajusta el encuadre de la foto'));
+
   /* ---------- Editor ---------- */
   const editor = $('#editor');
   const form = $('#editorForm');
@@ -312,13 +361,13 @@
   });
 
   // Imagen: WebP, máx. 2400 px
-  async function processImage(file) {
+  async function processImage(file, maxW) {
     if (!/^image\//.test(file.type)) throw new Error('El archivo no es una imagen.');
     if (file.size > 40 * 1024 * 1024) throw new Error('La imagen pesa más de 40 MB.');
     const url = URL.createObjectURL(file);
     try {
       const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('No se pudo leer la imagen.')); i.src = url; });
-      const scale = Math.min(1, 2400 / img.naturalWidth);
+      const scale = Math.min(1, (maxW || 2400) / img.naturalWidth);
       const w = Math.round(img.naturalWidth * scale), h = Math.round(img.naturalHeight * scale);
       const c = document.createElement('canvas');
       c.width = w; c.height = h;
@@ -434,6 +483,7 @@
       }
       const out = serialize();
       const used = new Set(out.projects.filter((p) => p.image).map((p) => p.image.src));
+      if (out.profile && out.profile.photo && out.profile.photo.src) used.add(out.profile.photo.src);
       const tree = [];
       setLabel('Subiendo imágenes…');
       for (const path of Object.keys(pendingImages)) {
@@ -442,7 +492,9 @@
         tree.push({ path, mode: '100644', type: 'blob', sha: blob.sha });
       }
       // Borra del repo las imágenes del panel que ya no usa ningún proyecto
-      const before = normalize(JSON.parse(remote.json)).projects.filter((p) => p.image && p.image.src.indexOf(IMG_DIR) === 0).map((p) => p.image.src);
+      const prev = normalize(JSON.parse(remote.json));
+      const before = prev.projects.filter((p) => p.image && p.image.src.indexOf(IMG_DIR) === 0).map((p) => p.image.src);
+      if (prev.profile && prev.profile.photo && String(prev.profile.photo.src).indexOf(PROFILE_DIR) === 0) before.push(prev.profile.photo.src);
       before.forEach((src) => { if (!used.has(src)) tree.push({ path: src, mode: '100644', type: 'blob', sha: null }); });
       tree.push({ path: DATA_PATH, mode: '100644', type: 'blob', content: JSON.stringify(out, null, 2) + '\n' });
 
@@ -476,6 +528,17 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { t.hidden = true; }, isError ? 9000 : 6000);
   }
+
+  /* ---------- Imágenes recién publicadas: si GitHub Pages aún no las tiene, se piden al repositorio ---------- */
+  const RAW = 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/' + BRANCH + '/';
+  document.addEventListener('error', (e) => {
+    const img = e.target;
+    if (!(img instanceof HTMLImageElement) || img.dataset.raw) return;
+    const src = img.getAttribute('src') || '';
+    if (src.indexOf('assets/') !== 0) return;
+    img.dataset.raw = '1';
+    img.src = RAW + src;
+  }, true);
 
   /* ---------- Arranque ---------- */
   const saved = store.get();

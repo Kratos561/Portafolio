@@ -27,7 +27,8 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; scroll-padding-top: var(--hdr-h); color-scheme: dark; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--hdr-h); color-scheme: dark; overflow-x: clip; }
+@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } } /* fundido suave entre páginas */
 body {
   background: var(--bg);
   color: var(--fg);
@@ -250,7 +251,7 @@ html { scrollbar-color: #3a3a3a var(--bg); }
 .showcase { position: relative; }
 .wheel__stage {
   position: relative; height: var(--h, 70vh); overflow: hidden;
-  width: 100vw; margin-left: calc(50% - 50vw);
+  width: var(--vw, 100vw); margin-left: calc(50% - var(--vw, 100vw) / 2); /* --vw = ancho sin barra de scroll (site.js) */
   touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab;
   outline: none;
 }
@@ -275,7 +276,7 @@ html { scrollbar-color: #3a3a3a var(--bg); }
   transition: border-color .35s var(--ease), box-shadow .35s var(--ease);
 }
 .wheel__stage.is-drag .wcard { cursor: grabbing; }
-.wcard.is-active { border-color: rgba(255, 51, 36, .8); box-shadow: 0 30px 64px rgba(0, 0, 0, .65), 0 6px 18px rgba(225, 6, 0, .22); }
+.wcard.is-active { border-color: rgba(255, 51, 36, .8); box-shadow: 0 30px 64px rgba(0, 0, 0, .7), 0 6px 16px rgba(0, 0, 0, .5); }
 .wcard__media, .wcard__media img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .wcard__media img {
   object-fit: cover; -webkit-user-drag: none;

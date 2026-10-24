@@ -565,7 +565,7 @@
 
   /* ---------- Carga ---------- */
   const targets = Array.from(document.querySelectorAll('[data-projects]'));
-  const needsData = targets.length || document.querySelector('[data-count],[data-door-bg]');
+  const needsData = targets.length || document.querySelector('[data-count],[data-door-bg],[data-profile-photo]');
   if (!needsData) return;
 
   // Petición con tiempo límite; 'no-cache' revalida con ETag (un 304 de GitHub no gasta límite)
@@ -608,6 +608,19 @@
         img.src = first.section === 'video' ? ytThumb(first.youtube, 'maxresdefault') : first.image.src;
         rawFallback(img);
       });
+
+      // Foto de «Sobre mí» (se cambia desde el panel → data.profile.photo)
+      const photo = data.profile && data.profile.photo;
+      if (photo) {
+        document.querySelectorAll('img[data-profile-photo]').forEach((img) => {
+          if (photo.src && img.getAttribute('src') !== photo.src) {
+            img.src = photo.src;
+            if (photo.width && photo.height) { img.width = photo.width; img.height = photo.height; }
+            rawFallback(img);
+          }
+          if (photo.focus != null && isFinite(photo.focus)) img.style.objectPosition = '50% ' + clamp(0, 100, +photo.focus) + '%';
+        });
+      }
 
       // Enlace directo: página.html#ver=id gira la rueda hasta el proyecto y abre su ficha
       const m = location.hash.match(/^#ver=(.+)$/);

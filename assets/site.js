@@ -11,6 +11,11 @@
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const hasIO = 'IntersectionObserver' in window;
 
+  /* ---------- Ancho útil sin la barra de scroll (lo usan los bloques a sangre completa) ---------- */
+  const setVW = () => document.documentElement.style.setProperty('--vw', document.documentElement.clientWidth + 'px');
+  setVW();
+  window.addEventListener('resize', setVW, { passive: true });
+
   /* ---------- Header ---------- */
   const hdr = document.getElementById('hdr');
   if (hdr) {

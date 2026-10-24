@@ -103,6 +103,20 @@ input:focus-visible, textarea:focus-visible { outline: none; border-color: var(-
 .iconbtn--star[aria-pressed="true"] .icon { fill: currentColor; }
 .iconbtn--danger:hover:not(:disabled) { color: #fff; background: #8f0300; border-color: #8f0300; }
 
+/* Tu foto */
+.aprofile { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: clamp(1.25rem, 4vw, 2.5rem); align-items: start; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+.aprofile__frame { aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid var(--line-2); border-radius: var(--r); background: #000; }
+.aprofile__frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.aprofile__side { display: grid; gap: 1.1rem; align-content: start; }
+.aprofile__title { font-family: var(--f-display); font-weight: 400; font-size: 2rem; line-height: 1; text-transform: uppercase; }
+.aprofile__lead { color: var(--muted); }
+.aprofile__pick { position: relative; justify-self: start; cursor: pointer; }
+.aprofile__pick input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.aprofile__pick:focus-within { outline: 2px solid var(--red-ink); outline-offset: 3px; }
+#focusVal { color: var(--red-ink); margin-left: .35rem; font-variant-numeric: tabular-nums; }
+input[type="range"] { width: 100%; accent-color: var(--red); min-height: 2rem; }
+@media (max-width: 640px) { .aprofile { grid-template-columns: 1fr; } .aprofile__frame { max-width: 16rem; } }
+
 /* Barra de publicación */
 .abar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
