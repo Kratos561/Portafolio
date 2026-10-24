@@ -148,24 +148,6 @@
       "tools": "",
       "tags": [],
       "youtube": "JmmSd6xWtU4"
-    },
-    {
-      "id": "kratos",
-      "section": "3d",
-      "title": "Kratos",
-      "description": "",
-      "year": "2026",
-      "category": "Render",
-      "tools": "Blender, Substance",
-      "tags": [
-        "Modelados",
-        "Textuizado"
-      ],
-      "image": {
-        "src": "assets/projects/kratos-mvlrm7yb.webp",
-        "width": 1000,
-        "height": 1000
-      }
     }
   ]
 }
