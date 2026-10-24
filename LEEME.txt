@@ -139,7 +139,7 @@ Dos SVG (detrás y delante de las letras) redibujados en cada frame:
 - CACHÉ: GitHub Pages deja CSS/JS 10 min en el navegador. Al cambiar
   styles.css o cualquier assets/*.js, sube el número ?v=N en TODAS las
   páginas (index, videos, 3d, admin) para que se descargue de nuevo.
-  Versión actual: ?v=8.
+  Versión actual: ?v=9.
 - Pendiente del dueño: ciudad (fila comentada en .facts de index.html).
 - Compartir: assets/og-portada.jpg (1200x630, captura de la portada
   PORTAFOLIO) en og:image de las 3 páginas. Si cambia la portada, vuelve

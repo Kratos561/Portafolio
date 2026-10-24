@@ -239,7 +239,7 @@ html { scrollbar-color: #3a3a3a var(--bg); }
 .door:hover .door__bg { transform: scale(1.045); opacity: .75; }
 .door__top { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 .door__title { font-family: var(--f-display); font-size: clamp(3.4rem, 2rem + 6vw, 7.5rem); line-height: .86; text-transform: uppercase; margin-bottom: .22em; }
-.door__bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+.door__bottom { display: flex; align-items: flex-end; justify-content: flex-end; gap: 1rem; }
 .door__desc { max-width: 34ch; color: rgba(247, 245, 240, .78); font-size: .98rem; }
 .door__go {
   flex: none; display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%;
