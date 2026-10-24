@@ -248,7 +248,7 @@ html { scrollbar-color: #3a3a3a var(--bg); }
 .door:hover .door__go { background: var(--red); border-color: var(--red); rotate: -45deg; }
 
 /* ============ RUEDA DE PROYECTOS (generada por assets/projects.js) ============ */
-.showcase { position: relative; }
+.showcase { position: relative; isolation: isolate; } /* las capas de la rueda (z 200–301) se quedan dentro y nunca pasan por encima del header (z 50) */
 .wheel__stage {
   position: relative; height: var(--h, 70vh); overflow: hidden;
   width: var(--vw, 100vw); margin-left: calc(50% - var(--vw, 100vw) / 2); /* --vw = ancho sin barra de scroll (site.js) */
