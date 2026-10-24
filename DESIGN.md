@@ -24,8 +24,8 @@ Resplandor: `radial-gradient` rojo detrás de cada palabra-póster y del contact
 2. **Serpiente** (`[data-snake]`): un SVG generado por `site.js` con dos capas (detrás y delante de las letras) que se entrelazan alrededor de la letra alta. Entra reptando y ondula sin parar; se pausa fuera de pantalla y queda quieta con `prefers-reduced-motion`.
 3. **Letra alta roja** (`.tall`) en cada título de sección: repite el gesto del póster.
 4. **Píldoras** (`.pill`): texto rojo, borde blanco de 1px y radio de .45em.
-5. **Tarjeta de proyecto** (`.work`): miniatura con marca de corte roja, categoría y botón «Reproducir / Ver proyecto»; debajo número rojo en Anton, título, descripción y etiquetas. La primera (y la última si sobra) va a lo ancho en 21:9.
-6. **Visor** (`.viewer`): pantalla completa negra con el medio a la izquierda y la ficha a la derecha (debajo en móvil).
+5. **Rueda de proyectos** (`.wheel` + `.wcard`): tarjetas 3:4 de bordes redondeados que orbitan un centro bajo la vista; la activa, recta y con borde rojo. Centro con aro discontinuo, texto circular, puntero ▲ rojo y nombre del proyecto en Anton. Navegación mínima ‹ 03 / 10 › con índice desplegable.
+6. **Ficha** (`.viewer`): pantalla completa negra con el medio a la izquierda y los detalles a la derecha (debajo en móvil); la miniatura se transforma en ella.
 
 ## Movimiento
 - El único momento de autor es la entrada de la portada (las letras suben y la serpiente repta).

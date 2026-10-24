@@ -71,20 +71,27 @@ del dueño. Si se pierde o filtra, revocarlo en GitHub y crear otro.
                        logo-md.png / logo-sm.png / favicon.png son copias.
 
 ----------------------------------------------------------------
-4. PRESENTACIÓN DE PROYECTOS (assets/projects.js)
+4. PRESENTACIÓN DE PROYECTOS (assets/projects.js) — RUEDA DE TARJETAS
 ----------------------------------------------------------------
-- Distribución automática para cualquier cantidad: 1 → ancho;
-  2 → dos mitades; 3+ → el primero ancho y el resto en pares; si sobra
-  uno, el último también va ancho. Se recalcula al filtrar.
-- Filtros por categoría: aparecen solos si hay 2 o más categorías.
-- Tarjeta: miniatura (YouTube en alta cuando existe), categoría, número,
-  título, descripción (3 líneas), etiquetas.
-- Visor (<dialog>): imagen completa o video con autoplay; anterior /
-  siguiente, flechas del teclado, Esc, deslizar en móvil, enlace a
-  ArtStation/YouTube. Enlace directo: 3d.html#ver=vintage-optics.
-- Datos rotos (sin título o sin imagen/ID) se ignoran; ids destacados
-  que ya no existen también. Si el JSON no carga, se muestra un aviso
-  con enlaces a YouTube y ArtStation.
+Inspirada en un abanico de tarjetas que orbita (referencia del dueño).
+- Tarjetas verticales 3:4 alrededor de un centro bajo la vista; la
+  activa queda arriba y recta. Centro: aro discontinuo con texto
+  circular («ARTE 3D · AISAK 3D»), puntero ▲ y nombre del activo.
+- Girar: arrastrar / deslizar (con inercia), flechas ‹ ›, teclado
+  (← → Inicio Fin, Enter abre), desplazamiento horizontal del trackpad.
+- Tocar una tarjeta abre su FICHA (dialog): imagen completa o video,
+  categoría, descripción, etiquetas, enlace, anterior/siguiente. La
+  miniatura se transforma en la ficha (View Transitions; si el
+  navegador no la inicia en 350 ms, abre igual).
+- VOLVER A UN PROYECTO: el contador «03 / 10» abre un índice numerado
+  para saltar a cualquiera; la rueda recuerda el último visto en la
+  sesión; enlace directo: videos.html#ver=<id>.
+- Escala sin romperse: con 1 proyecto no hay controles; con 2 no hay
+  bucle; con 3+ gira en bucle y, si hacen falta para llenar el arco,
+  repite tarjetas como copias decorativas (aria-hidden, sin tabulación).
+  Solo se dibujan las tarjetas visibles (30 proyectos → ~7 en pantalla).
+- Filtros por categoría (si hay 2+) reconstruyen la rueda.
+- Datos rotos se ignoran; si el JSON no carga, aviso con enlaces.
 
 ----------------------------------------------------------------
 5. SISTEMA VISUAL (detalle en DESIGN.md)
@@ -128,6 +135,6 @@ Dos SVG (detrás y delante de las letras) redibujados en cada frame:
 - CACHÉ: GitHub Pages deja CSS/JS 10 min en el navegador. Al cambiar
   styles.css o cualquier assets/*.js, sube el número ?v=N en TODAS las
   páginas (index, videos, 3d, admin) para que se descargue de nuevo.
-  Versión actual: ?v=5.
+  Versión actual: ?v=6.
 - Pendiente del dueño: ciudad (fila comentada en .facts de index.html)
   y og:image con URL absoluta.
