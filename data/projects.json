@@ -12,7 +12,7 @@
       "description": "Equipo óptico antiguo en un entorno deteriorado. Modelé las piezas desde cero y trabajé el desgaste en los materiales: óxido, polvo y una luz que separa cada objeto.",
       "year": "2026",
       "category": "",
-      "tools": "Blender · Cycles",
+      "tools": "Blender",
       "tags": [
         "Modelado",
         "Materiales",
@@ -52,7 +52,7 @@
       "description": "Estudio de luz roja volumétrica sobre el material.",
       "year": "2026",
       "category": "",
-      "tools": "Blender · Cycles",
+      "tools": "Blender",
       "tags": [
         "Luz"
       ],
@@ -70,7 +70,7 @@
       "description": "Entorno con armamento. La composición y la luz están pensadas para mostrar los activos en contexto.",
       "year": "2026",
       "category": "",
-      "tools": "Blender · Cycles",
+      "tools": "Blender",
       "tags": [
         "Entorno"
       ],
