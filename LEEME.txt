@@ -1,5 +1,5 @@
 ================================================================
-PORTAFOLIO ISAAC LORENZO — AISAK 3D  (v2, estética póster)
+PORTAFOLIO ISAAC LORENZO — AISAK 3D  (v3: proyectos con panel)
 Documentación para continuar el trabajo (humano o agente)
 ================================================================
 Idioma: ESPAÑOL. Excepciones: nombres propios, títulos de videos y
@@ -9,103 +9,116 @@ Contexto de producto: PRODUCT.md · Sistema visual: DESIGN.md
 ----------------------------------------------------------------
 1. CÓMO VER LA WEB
 ----------------------------------------------------------------
-No abrir con doble clic (file://): YouTube falla con "Error 153".
+No abrir con doble clic (file://): YouTube falla con "Error 153" y los
+proyectos (data/projects.json) no cargan.
+  Doble clic en ABRIR-WEB.cmd, o:
   powershell -ExecutionPolicy Bypass -File .\servidor-local.ps1
   y abrir http://localhost:8000/
-En un hosting https (Netlify, Vercel, GitHub Pages) funciona sin script.
+Publicado con GitHub Pages desde la rama main del repo
+github.com/Kratos561/Portafolio (versión anterior en la rama version-anterior).
 Al publicar, NO subir: _respaldo-v1/, deepseek_html_*.html, los
 originales "ChatGPT Image...png" e "image.png_2K...jpeg", .claude/.
 
 ----------------------------------------------------------------
-2. ARCHIVOS
+2. AÑADIR PROYECTOS (SIN CÓDIGO) — PANEL DEL PROPIETARIO
 ----------------------------------------------------------------
-  index.html     Portada póster → Sobre mí → Trabajo (puertas) →
-                 Destacado (3 videos: Comercial de Comida a lo ancho) → Servicios → ticker → Proceso
-                 → Contacto + footer
-  videos.html    Portada "VIDEOS" (solo póster) + galería de 6 videos (fachada YouTube)
-  3d.html        Portada "ARTE 3D" (solo póster) + galería de 4 renders
-  styles.css     Estilo único de las 3 páginas
-  assets/site.js Todo el JS (sin dependencias): header, enlace activo,
-                 reveal, ticker, fachada YouTube, copiar email, año y
-                 la SERPIENTE de la portada
-  assets/logo.png      Logo oficial (876x1795). NO modificar.
-  assets/logo-md.png   Copia reducida (640 px de alto) para tarjetas
-  assets/logo-sm.png   Copia reducida (240 px) para header y footer
-  assets/favicon.png   64x64 cuadrado (logo centrado)
-  assets/3d-*.webp     Renders: Vintage Optics, Volatile Assets, Red Breath,
-                       Weapon environment (enlaces a ArtStation en 3d.html)
-  assets/portrait.jpg  Foto de Isaac (577x1280; recorte 4:5 por CSS)
-  assets/cover-bg.jpg  Fondo de la v1. Ya no se usa.
-  assets/logo.svg      Antiguo, no se usa.
-  _respaldo-v1/        Copia completa de la versión anterior (editorial)
+Dirección: <web>/admin.html  (no está enlazada en ninguna página y
+lleva noindex; solo el dueño la conoce).
+  1. Entrar con un token de GitHub "fine-grained":
+     Repository access → Only select repositories → Portafolio
+     Permissions → Contents: Read and write
+     El panel solo deja entrar a la cuenta Kratos561.
+  2. "Nuevo proyecto": Arte 3D (sube una imagen: se convierte a WebP y
+     se reduce a 2400 px) o Video (pega el enlace de YouTube: el título
+     se rellena solo). Campos: título, descripción, categoría, año,
+     herramientas, etiquetas, enlace externo, "Destacado".
+  3. Ordenar con las flechas, destacar con la estrella, editar o borrar.
+  4. "Publicar en la web": hace UN commit en main con la imagen y
+     data/projects.json. GitHub Pages actualiza la web en 1–2 minutos.
+Con "Recordar en este dispositivo", ese navegador muestra un botón
+"Editar proyectos" en la web (nadie más lo ve). "Salir" lo quita.
+Seguridad: el token nunca está en el código; vive solo en el navegador
+del dueño. Si se pierde o filtra, revocarlo en GitHub y crear otro.
 
 ----------------------------------------------------------------
-3. SISTEMA VISUAL (detalle en DESIGN.md)
+3. ARCHIVOS
 ----------------------------------------------------------------
-Fondo #050505 con resplandor rojo radial · texto #F7F5F0 · gris #A39E97
+  index.html     Portada póster → Sobre mí → Trabajo (puertas con
+                 contadores) → Destacado (data/projects.json → featured)
+                 → Servicios → ticker → Proceso → Contacto + footer
+  videos.html    Portada "VIDEOS" + filtros + galería (sección "video")
+  3d.html        Portada "ARTE 3D" + filtros + galería (sección "3d")
+  admin.html     Panel del propietario (ver punto 2)
+  data/projects.json   ÚNICA fuente de los proyectos:
+      featured: [ids en orden]       → "Destacado" de inicio
+      projects: [{ id, section ("3d" | "video"), title, description,
+                   year, category, tools, tags[], link,
+                   image {src,width,height} (3d) | youtube (video) }]
+      El orden del array es el orden en la web.
+  styles.css           Estilo de las páginas públicas (y base del panel)
+  assets/site.js       Header, reveal (window.AISAK.reveal), ticker,
+                       copiar email, año, botón del dueño y la SERPIENTE
+  assets/projects.js   Galerías, filtros, contadores, visor y #ver=id
+  assets/admin.js / admin.css   Panel
+  assets/projects/     Imágenes subidas desde el panel
+  assets/3d-*.webp     Renders iniciales · assets/portrait.jpg  Foto
+  assets/logo.png      Logo oficial. NO modificar (solo escalar);
+                       logo-md.png / logo-sm.png / favicon.png son copias.
+
+----------------------------------------------------------------
+4. PRESENTACIÓN DE PROYECTOS (assets/projects.js)
+----------------------------------------------------------------
+- Distribución automática para cualquier cantidad: 1 → ancho;
+  2 → dos mitades; 3+ → el primero ancho y el resto en pares; si sobra
+  uno, el último también va ancho. Se recalcula al filtrar.
+- Filtros por categoría: aparecen solos si hay 2 o más categorías.
+- Tarjeta: miniatura (YouTube en alta cuando existe), categoría, número,
+  título, descripción (3 líneas), etiquetas.
+- Visor (<dialog>): imagen completa o video con autoplay; anterior /
+  siguiente, flechas del teclado, Esc, deslizar en móvil, enlace a
+  ArtStation/YouTube. Enlace directo: 3d.html#ver=vintage-optics.
+- Datos rotos (sin título o sin imagen/ID) se ignoran; ids destacados
+  que ya no existen también. Si el JSON no carga, se muestra un aviso
+  con enlaces a YouTube y ArtStation.
+
+----------------------------------------------------------------
+5. SISTEMA VISUAL (detalle en DESIGN.md)
+----------------------------------------------------------------
+Fondo #050505 con resplandor rojo · texto #F7F5F0 · gris #A39E97
 Rojo relleno #E10600 · rojo para texto pequeño #FF3324 (contraste AA)
-Fuentes: Anton (display, display=block) + Archivo variable (texto,
-  navegación y píldoras; píldoras con font-stretch 115 %, peso 800).
-Firma:
-  - .poster: palabra a todo el ancho, letras .ch, una .ch--tall
-    (scale 1 1.7) y tres píldoras (tl / bl / br).
-  - .tall dentro de cada título: una letra roja estirada (eco del póster).
-  - .pill: texto rojo, borde blanco de 1px, fondo negro sólido.
-  - Iconos: sprite SVG inline al inicio de cada página (#i-arrow,
-    #i-up, #i-play, #i-ext, #i-copy, #i-check). Sin emojis ni ▶ unicode.
-Sin cursor personalizado: se usa el del sistema.
+Fuentes: Anton (display) + Archivo variable (texto, navegación, píldoras).
+Firma: .poster (palabra + .ch--tall + 3 píldoras), .tall en títulos,
+.pill, iconos en sprite SVG inline (#i-arrow, #i-play, #i-expand,
+#i-close, #i-prev, #i-next, #i-ext, #i-copy, #i-check, #i-up).
+[hidden] siempre oculta (regla global con !important).
 
 ----------------------------------------------------------------
-4. LA SERPIENTE ([data-snake] en el h1 .poster)
+6. LA SERPIENTE ([data-snake] en el h1 .poster)
 ----------------------------------------------------------------
-site.js crea dos SVG (detrás y delante de las letras) y dibuja el cuerpo
-con un polígono que se recalcula en cada frame (cabeza, cuello, cola
-afinada, escamas por <pattern>, ojos y lengua que asoma).
-  - Entrada: repta desde la derecha (≈2 s tras las letras) y luego
-    ondula sin parar. Se pausa fuera de pantalla y en pestañas ocultas.
-  - Con prefers-reduced-motion se dibuja quieta y sin animaciones.
-  - Entrelazado: la capa delantera se recorta sobre el trazo izquierdo
-    de la letra alta y sobre la letra de la cola (por defecto la que
-    está 2 después de la alta).
-  - Cabeza y cola: data-snake-head / data-snake-tail (índice de letra,
-    sin contar espacios). Por defecto la cabeza va 3 letras antes de la alta.
-  - Tamaño de la palabra: en la portada font-size usa 92vw / 4.36;
-    en subpáginas se usa --poster-w (ancho de la palabra en em:
-    VIDEOS 2.55, ARTE 3D 2.98). Si cambias la palabra, mide de nuevo:
-    palabra.offsetWidth / font-size.
-
-----------------------------------------------------------------
-5. VIDEOS (fachada)
-----------------------------------------------------------------
-<button class="vplay" data-yt="ID"> con miniatura hqdefault en el HTML;
-site.js la cambia por maxresdefault cuando existe y, al hacer clic,
-inyecta un iframe youtube-nocookie con autoplay (16:9, sin capas encima).
-  V01 Milo J - 3 Pecado Despues ............ N8ENK1se66I
-  V02 Comercial de Comida .................. qLOa3IcbxlE
-  V03 Comercial Deportivo .................. jqgSZ3iCIGY
-  V04 Motion Graphics - Comercial de Nike .. 4--5J4b78jE
-  V05 Animacion de Meta .................... LELFhmCp2sA
-  V06 Comercial de Nike .................... JmmSd6xWtU4
-Galería: el primero y el último (si es par) ocupan todo el ancho.
-Para añadir uno: copia un <article class="vcard"> y cambia el ID en
-data-yt, en la miniatura y en el enlace.
-
-----------------------------------------------------------------
-6. PENDIENTE DE CONTENIDO (lo pone el dueño)
-----------------------------------------------------------------
-  - Nuevos renders: copiar un <article class="frame"> en 3d.html.
-  - Ciudad: fila comentada en .facts (index.html)
-  - og:image: necesita una URL absoluta tras publicar.
-Email: isaacjhovanni@gmail.com (mailto, data-copy y footer en las 3 páginas).
+Dos SVG (detrás y delante de las letras) redibujados en cada frame:
+  - Cuerpo con volumen: borde oscuro, cuerpo con escamas finas,
+    rombos dorsales que siguen la curva y brillo en el lomo.
+  - Cabeza de víbora (mandíbula ancha y cuello), ojos con brillo,
+    fosas nasales y lengua bífida con doble chasquido cada ~3,4 s.
+  - La cabeza sigue al cursor en vertical (solo ratón).
+  - Entrelazado alterno: por detrás de la letra anterior a la alta,
+    por delante del trazo izquierdo de la alta, por detrás del derecho
+    y por detrás de la letra de la cola.
+  - Entra reptando y ondula; se pausa fuera de pantalla; con
+    prefers-reduced-motion queda quieta.
+  - data-snake-head / data-snake-tail: índice de letra (sin espacios).
+  - Tamaño: portada 92vw / 4.36; subpáginas --poster-w (VIDEOS 2.55,
+    ARTE 3D 2.98). Si cambias la palabra, mide offsetWidth / font-size.
 
 ----------------------------------------------------------------
 7. NOTAS PARA OTRO AGENTE
 ----------------------------------------------------------------
-- El contenido es visible sin JS: site.js solo oculta (reveal) lo que
-  está por debajo del pliegue al cargar. No añadir CSS que oculte por
-  defecto.
-- No reintroducir: GSAP/matchMedia (causaba contenido invisible en
-  móvil), cursor:none, iframes directos en el HTML, numeración 01/02 en
-  la navegación, etiquetas tipo "eyebrow" encima de los títulos.
+- Los proyectos NO se escriben en el HTML: se editan en
+  data/projects.json (o desde el panel).
+- No reintroducir: GSAP/matchMedia (contenido invisible en móvil),
+  cursor:none, iframes directos en el HTML, eyebrows sobre títulos,
+  tokens en el código.
 - Nuevos títulos de sección: <h2 class="title">...<span class="tall">o</span>...</h2>
 - Responsive: breakpoints al final de styles.css (1000 / 760 / 560 / 380).
+- Pendiente del dueño: ciudad (fila comentada en .facts de index.html)
+  y og:image con URL absoluta.

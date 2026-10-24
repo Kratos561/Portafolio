@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Arte 3D — Isaac Lorenzo | AISAK 3D</title>
-<meta name="description" content="Arte 3D de Isaac Lorenzo (AISAK 3D): Vintage Optics, Volatile Assets, Red Breath y Weapon environment. Modelado, materiales e iluminación en Blender." />
+<meta name="description" content="Arte 3D de Isaac Lorenzo (AISAK 3D): renders de objetos, materiales e iluminación hechos en Blender." />
 <meta name="theme-color" content="#050505" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Arte 3D — Isaac Lorenzo" />
@@ -23,6 +23,11 @@
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19.5v-15M6 10.5l6-6 6 6"/></symbol>
   <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
   <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.5 4.8v14.4L19.5 12z"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
 </svg>
 
@@ -56,59 +61,18 @@
     </h1>
   </section>
 
+  <!-- RENDERS: se cargan de data/projects.json (añádelos desde admin.html) -->
   <section id="renders" class="section" aria-labelledby="renders-title">
     <div class="wrap">
       <div class="sec-head">
         <h2 id="renders-title" class="title">C<span class="tall">o</span>lección</h2>
         <div class="sec-head__side">
-          <p>Cuatro piezas modeladas, texturizadas e iluminadas en Blender.</p>
+          <p>Piezas modeladas, texturizadas e iluminadas en Blender. Toca cualquiera para verla a pantalla completa.</p>
           <a class="btn" href="https://www.artstation.com/isazz_jv" target="_blank" rel="noopener">Perfil en ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
         </div>
       </div>
-
-      <!-- Para añadir una pieza: copia un <article class="frame">, cambia la imagen (con su width/height reales),
-           el título, la descripción, las píldoras y el enlace. frame--wide ocupa todo el ancho. -->
-      <div class="frames">
-        <article class="frame frame--wide" id="pieza-01" data-reveal>
-          <div class="frame__box"><img src="assets/3d-vintage-optics.webp" alt="Vintage Optics — colección de equipo óptico antiguo en un entorno deteriorado" width="1920" height="1242" decoding="async" /></div>
-          <div class="frame__meta">
-            <h3>Vintage Optics</h3>
-            <a class="vcard__yt" href="https://www.artstation.com/artwork/P6lDao" target="_blank" rel="noopener">ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-          <p class="frame__desc">Equipo óptico antiguo en un entorno deteriorado. Modelé las piezas desde cero y trabajé el desgaste en los materiales: óxido, polvo y una luz que separa cada objeto.</p>
-          <ul class="frame__tags"><li class="pill">Destacada</li><li class="pill pill--muted">2026</li><li class="pill pill--muted">Blender · Cycles</li><li class="pill pill--muted">Modelado · Materiales · Luz</li></ul>
-        </article>
-
-        <article class="frame" id="pieza-02" data-reveal>
-          <div class="frame__box"><img src="assets/3d-volatile-assets.webp" alt="Volatile Assets — munición militar con humo volumétrico" width="1280" height="720" loading="lazy" decoding="async" /></div>
-          <div class="frame__meta">
-            <h3>Volatile Assets</h3>
-            <a class="vcard__yt" href="https://www.artstation.com/artwork/QK1DOL" target="_blank" rel="noopener">ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-          <p class="frame__desc">Munición militar con humo y partículas generados por nodos, y materiales pensados para juego y VFX.</p>
-          <ul class="frame__tags"><li class="pill pill--muted">2026</li><li class="pill pill--muted">Blender · Nodos</li></ul>
-        </article>
-
-        <article class="frame" id="pieza-03" data-reveal>
-          <div class="frame__box"><img src="assets/3d-red-breath.webp" alt="Red Breath — render con luz roja volumétrica" width="1920" height="1080" loading="lazy" decoding="async" /></div>
-          <div class="frame__meta">
-            <h3>Red Breath</h3>
-            <a class="vcard__yt" href="https://www.artstation.com/artwork/5WNVmW" target="_blank" rel="noopener">ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-          <p class="frame__desc">Estudio de luz roja volumétrica sobre el material.</p>
-          <ul class="frame__tags"><li class="pill pill--muted">2026</li><li class="pill pill--muted">Blender · Cycles</li></ul>
-        </article>
-
-        <article class="frame frame--wide" id="pieza-04" data-reveal>
-          <div class="frame__box"><img src="assets/3d-weapon-environment.webp" alt="Weapon environment — entorno 3D con armamento" width="1920" height="1080" loading="lazy" decoding="async" /></div>
-          <div class="frame__meta">
-            <h3>Weapon environment</h3>
-            <a class="vcard__yt" href="https://www.artstation.com/artwork/y4dyB9" target="_blank" rel="noopener">ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-          <p class="frame__desc">Entorno con armamento. La composición y la luz están pensadas para mostrar los activos en contexto.</p>
-          <ul class="frame__tags"><li class="pill pill--muted">2026</li><li class="pill pill--muted">Blender · Cycles</li></ul>
-        </article>
-      </div>
+      <div class="filters" data-filters="3d" role="group" aria-label="Filtrar por categoría" hidden></div>
+      <div class="works" data-projects="3d"><noscript><p class="works-empty">Activa JavaScript para ver los proyectos, o míralos en <a href="https://www.youtube.com/@Ekko-Sound">YouTube</a> y <a href="https://www.artstation.com/isazz_jv">ArtStation</a>.</p></noscript></div>
     </div>
   </section>
 
@@ -154,5 +118,6 @@
 </main>
 
 <script src="assets/site.js" defer></script>
+<script src="assets/projects.js" defer></script>
 </body>
 </html>

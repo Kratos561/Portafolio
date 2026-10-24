@@ -7,15 +7,21 @@ Se publica con GitHub Pages desde la rama `main` (raíz). La versión anterior d
 ## Estructura
 
 ```
-index.html      Portada + sobre mí + galerías + destacado + servicios + proceso + contacto
-3d.html         Arte 3D: Vintage Optics, Volatile Assets, Red Breath, Weapon environment
-videos.html     6 videos de YouTube (patrón fachada, se reproducen dentro de la web)
-styles.css      Estilo único de las 3 páginas
-assets/site.js  Header, reveal, ticker, fachada YouTube, copiar email y la serpiente SVG
-PRODUCT.md      Contexto del producto
-DESIGN.md       Sistema visual (tokens, firma, movimiento)
-LEEME.txt       Documentación de trabajo
+index.html          Portada + sobre mí + galerías + destacado + servicios + proceso + contacto
+3d.html             Galería de Arte 3D (se pinta desde data/projects.json)
+videos.html         Galería de videos de YouTube (se pinta desde data/projects.json)
+admin.html          Panel privado del propietario para añadir y publicar proyectos
+data/projects.json  Única fuente de los proyectos y de «Destacado»
+styles.css          Estilo de las páginas
+assets/site.js      Header, reveal, ticker, copiar email y la serpiente SVG
+assets/projects.js  Tarjetas, filtros, contadores y visor a pantalla completa
+assets/admin.*      Lógica y estilo del panel
+PRODUCT.md / DESIGN.md / LEEME.txt  Documentación
 ```
+
+## Añadir proyectos
+
+Desde `admin.html` (no enlazada en la web). Se entra con un token *fine-grained* de GitHub con **Contents: Read and write** sobre este repositorio; solo acepta la cuenta del propietario. Al pulsar «Publicar en la web» se hace un commit en `main` y GitHub Pages actualiza la web en 1–2 minutos. Detalles en `LEEME.txt`.
 
 ## Ver en local
 

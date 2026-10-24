@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "featured": [
+    "comercial-de-comida",
+    "vintage-optics",
+    "motion-graphics-comercial-de-nike",
+    "milo-j-3-pecado-despues"
+  ],
+  "projects": [
+    {
+      "id": "vintage-optics",
+      "section": "3d",
+      "title": "Vintage Optics",
+      "description": "Equipo óptico antiguo en un entorno deteriorado. Modelé las piezas desde cero y trabajé el desgaste en los materiales: óxido, polvo y una luz que separa cada objeto.",
+      "year": "2026",
+      "category": "",
+      "tools": "Blender · Cycles",
+      "tags": [
+        "Modelado",
+        "Materiales",
+        "Luz"
+      ],
+      "link": "https://www.artstation.com/artwork/P6lDao",
+      "image": {
+        "src": "assets/3d-vintage-optics.webp",
+        "width": 1920,
+        "height": 1242
+      }
+    },
+    {
+      "id": "volatile-assets",
+      "section": "3d",
+      "title": "Volatile Assets",
+      "description": "Munición militar con humo y partículas generados por nodos, y materiales pensados para juego y VFX.",
+      "year": "2026",
+      "category": "",
+      "tools": "Blender · Nodos",
+      "tags": [
+        "Modelado",
+        "Materiales",
+        "Efectos"
+      ],
+      "link": "https://www.artstation.com/artwork/QK1DOL",
+      "image": {
+        "src": "assets/3d-volatile-assets.webp",
+        "width": 1280,
+        "height": 720
+      }
+    },
+    {
+      "id": "red-breath",
+      "section": "3d",
+      "title": "Red Breath",
+      "description": "Estudio de luz roja volumétrica sobre el material.",
+      "year": "2026",
+      "category": "",
+      "tools": "Blender · Cycles",
+      "tags": [
+        "Luz"
+      ],
+      "link": "https://www.artstation.com/artwork/5WNVmW",
+      "image": {
+        "src": "assets/3d-red-breath.webp",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "id": "weapon-environment",
+      "section": "3d",
+      "title": "Weapon environment",
+      "description": "Entorno con armamento. La composición y la luz están pensadas para mostrar los activos en contexto.",
+      "year": "2026",
+      "category": "",
+      "tools": "Blender · Cycles",
+      "tags": [
+        "Entorno"
+      ],
+      "link": "https://www.artstation.com/artwork/y4dyB9",
+      "image": {
+        "src": "assets/3d-weapon-environment.webp",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "id": "milo-j-3-pecado-despues",
+      "section": "video",
+      "title": "Milo J - 3 Pecado Despues",
+      "description": "",
+      "year": "",
+      "category": "Videoclip",
+      "tools": "",
+      "tags": [],
+      "youtube": "N8ENK1se66I"
+    },
+    {
+      "id": "comercial-de-comida",
+      "section": "video",
+      "title": "Comercial de Comida",
+      "description": "",
+      "year": "",
+      "category": "Comercial",
+      "tools": "",
+      "tags": [],
+      "youtube": "qLOa3IcbxlE"
+    },
+    {
+      "id": "comercial-deportivo",
+      "section": "video",
+      "title": "Comercial Deportivo",
+      "description": "",
+      "year": "",
+      "category": "Comercial",
+      "tools": "",
+      "tags": [],
+      "youtube": "jqgSZ3iCIGY"
+    },
+    {
+      "id": "motion-graphics-comercial-de-nike",
+      "section": "video",
+      "title": "Motion Graphics - Comercial de Nike",
+      "description": "",
+      "year": "",
+      "category": "Motion graphics",
+      "tools": "",
+      "tags": [],
+      "youtube": "4--5J4b78jE"
+    },
+    {
+      "id": "animacion-de-meta",
+      "section": "video",
+      "title": "Animacion de Meta",
+      "description": "",
+      "year": "",
+      "category": "Animación",
+      "tools": "",
+      "tags": [],
+      "youtube": "LELFhmCp2sA"
+    },
+    {
+      "id": "comercial-de-nike",
+      "section": "video",
+      "title": "Comercial de Nike",
+      "description": "",
+      "year": "",
+      "category": "Comercial",
+      "tools": "",
+      "tags": [],
+      "youtube": "JmmSd6xWtU4"
+    }
+  ]
+}

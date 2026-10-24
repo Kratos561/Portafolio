@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<meta name="referrer" content="no-referrer" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://i.ytimg.com https://avatars.githubusercontent.com; connect-src 'self' https://api.github.com https://www.youtube.com; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+<title>Panel — AISAK 3D</title>
+<meta name="theme-color" content="#050505" />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=block" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="assets/admin.css" />
+</head>
+<body class="admin">
+
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19.5v-15M6 10.5l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4.5v15M6 13.5l6 6 6-6"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4zM13.5 6.5l4 4"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-12M9 7V4h6v3"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.8l2.5 5.2 5.7.8-4.1 4 1 5.7L12 16.8l-5.1 2.7 1-5.7-4.1-4 5.7-.8z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 16l5-5 4 4 3-3 5 5"/><circle cx="15.5" cy="9" r="1.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.5 4.8v14.4L19.5 12z"/></symbol>
+</svg>
+
+<header class="ahdr">
+  <a class="ahdr__brand" href="index.html"><img src="assets/logo-sm.png" alt="" width="20" height="40" /><span>Panel <span>· AISAK 3D</span></span></a>
+  <div class="ahdr__user" id="userBox" hidden>
+    <img id="userAvatar" src="data:," alt="" width="32" height="32" />
+    <span id="userLogin"></span>
+    <a class="btn" href="index.html" target="_blank" rel="noopener">Ver web <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></a>
+    <button class="btn" type="button" id="logoutBtn">Salir</button>
+  </div>
+</header>
+
+<!-- ACCESO -->
+<main id="loginView" class="alogin" hidden>
+  <form class="alogin__card" id="loginForm" novalidate>
+    <h1 class="alogin__title">Acces<span class="tall">o</span></h1>
+    <p class="alogin__lead">Solo para el propietario. Entra con un token de GitHub con permiso de escritura en el repositorio <strong>Kratos561/Portafolio</strong>.</p>
+    <div class="field">
+      <label for="tokenInput">Token de GitHub</label>
+      <input id="tokenInput" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" required />
+    </div>
+    <label class="check"><input type="checkbox" id="rememberInput" checked /> Recordar en este dispositivo</label>
+    <p class="aerror" id="loginError" role="alert" hidden></p>
+    <button class="btn btn--red" type="submit" id="loginBtn">Entrar <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <details class="ahelp">
+      <summary>¿Cómo creo el token?</summary>
+      <ol>
+        <li>Abre <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained tokens → Generate new token</a>.</li>
+        <li>En <em>Repository access</em> elige <em>Only select repositories</em> → <strong>Portafolio</strong>.</li>
+        <li>En <em>Permissions → Repository permissions</em> pon <strong>Contents: Read and write</strong>.</li>
+        <li>Genera el token, cópialo y pégalo aquí. Nunca lo compartas.</li>
+      </ol>
+    </details>
+  </form>
+</main>
+
+<!-- PANEL -->
+<main id="appView" class="amain" hidden>
+  <div class="amain__head">
+    <h1 class="amain__title">Pr<span class="tall">o</span>yectos</h1>
+    <button class="btn btn--red" type="button" id="newBtn"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Nuevo proyecto</button>
+  </div>
+  <div class="atabs" role="tablist" aria-label="Secciones">
+    <button class="atab" role="tab" type="button" data-tab="3d" aria-selected="true">Arte 3D <span data-tabcount="3d">0</span></button>
+    <button class="atab" role="tab" type="button" data-tab="video" aria-selected="false">Video <span data-tabcount="video">0</span></button>
+    <button class="atab" role="tab" type="button" data-tab="featured" aria-selected="false">Destacado <span data-tabcount="featured">0</span></button>
+  </div>
+  <p class="ahint" id="tabHint"></p>
+  <ol class="alist" id="list" aria-live="polite"></ol>
+</main>
+
+<!-- BARRA DE PUBLICACIÓN -->
+<div class="abar" id="publishBar" hidden>
+  <p><strong id="dirtyCount">0</strong> <span id="dirtyLabel">cambios sin publicar</span></p>
+  <div class="btn-row">
+    <button class="btn" type="button" id="discardBtn">Descartar</button>
+    <button class="btn btn--red" type="button" id="publishBtn">Publicar en la web <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  </div>
+</div>
+
+<!-- EDITOR -->
+<dialog class="editor" id="editor" aria-labelledby="editorTitle">
+  <form class="editor__form" id="editorForm" novalidate>
+    <div class="editor__head">
+      <h2 id="editorTitle">Nuevo proyecto</h2>
+      <button class="iconbtn" type="button" data-close aria-label="Cerrar"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+
+    <fieldset class="field">
+      <legend>Sección</legend>
+      <div class="seg">
+        <label><input type="radio" name="section" value="3d" checked /><span>Arte 3D</span></label>
+        <label><input type="radio" name="section" value="video" /><span>Video</span></label>
+      </div>
+    </fieldset>
+
+    <div class="field" data-for="video">
+      <label for="fYoutube">Enlace de YouTube *</label>
+      <input id="fYoutube" type="url" inputmode="url" placeholder="https://youtu.be/…" autocomplete="off" />
+      <p class="field__note">Al pegar el enlace se rellena el título automáticamente.</p>
+    </div>
+
+    <div class="field" data-for="3d">
+      <span class="field__label" id="imgLabel">Imagen *</span>
+      <label class="drop" id="drop">
+        <input id="fImage" type="file" accept="image/png,image/jpeg,image/webp,image/avif" aria-labelledby="imgLabel" />
+        <span class="drop__empty"><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg>Arrastra una imagen o haz clic para elegirla<small>Se convierte a WebP y se reduce a 2400 px de ancho como máximo.</small></span>
+        <img class="drop__preview" id="imgPreview" alt="" hidden />
+      </label>
+      <p class="field__note" id="imgInfo"></p>
+    </div>
+
+    <div class="field">
+      <label for="fTitle">Título *</label>
+      <input id="fTitle" type="text" maxlength="90" required />
+    </div>
+    <div class="field">
+      <label for="fDesc">Descripción</label>
+      <textarea id="fDesc" rows="3" maxlength="500"></textarea>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="fCategory">Categoría</label>
+        <input id="fCategory" type="text" list="catList" maxlength="40" placeholder="Comercial, Render…" />
+        <datalist id="catList"></datalist>
+      </div>
+      <div class="field">
+        <label for="fYear">Año</label>
+        <input id="fYear" type="text" inputmode="numeric" maxlength="9" placeholder="2026" />
+      </div>
+    </div>
+    <div class="field">
+      <label for="fTools">Herramientas</label>
+      <input id="fTools" type="text" maxlength="80" placeholder="Blender · Cycles" />
+    </div>
+    <div class="field">
+      <label for="fTags">Etiquetas</label>
+      <input id="fTags" type="text" maxlength="160" placeholder="Modelado, Materiales, Luz" />
+      <p class="field__note">Separadas por comas.</p>
+    </div>
+    <div class="field">
+      <label for="fLink">Enlace externo</label>
+      <input id="fLink" type="url" inputmode="url" placeholder="https://www.artstation.com/artwork/…" />
+    </div>
+    <label class="check"><input type="checkbox" id="fFeatured" /> Mostrar en «Destacado» de la página de inicio</label>
+
+    <p class="aerror" id="editorError" role="alert" hidden></p>
+    <div class="editor__foot">
+      <button class="btn" type="button" data-close>Cancelar</button>
+      <button class="btn btn--red" type="submit" id="saveBtn">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="assets/admin.js" defer></script>
+</body>
+</html>

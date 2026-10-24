@@ -4,7 +4,7 @@
 Web estática (HTML + CSS + JS sin build). Se publica en un hosting https (Netlify, Vercel, GitHub Pages); en local se sirve con `servidor-local.ps1`.
 
 ## Stack
-`index.html`, `3d.html`, `videos.html`, `styles.css` y `assets/site.js`. Fuentes de Google Fonts. Sin frameworks ni dependencias de CDN de JS.
+`index.html`, `3d.html`, `videos.html`, `admin.html`, `styles.css`, `assets/site.js`, `assets/projects.js` y `data/projects.json` (fuente de los proyectos). Fuentes de Google Fonts. Sin frameworks ni dependencias de CDN de JS.
 
 ## Users
 Clientes y agencias que buscan un artista 3D / editor de video freelance, y reclutadores que llegan desde YouTube o redes. Miran sobre todo desde el móvil y deciden en segundos si el trabajo les convence.
@@ -33,6 +33,8 @@ Estética del póster de referencia: negro puro, resplandor rojo, letras blancas
 - El trabajo manda: los videos reales se muestran pronto y se reproducen sin salir de la web.
 - Contactar debe costar un clic (email copiable y mailto).
 - No mostrar notas internas ni marcadores de desarrollo a los visitantes.
+- El dueño añade y publica proyectos sin código desde admin.html (solo su cuenta de GitHub puede publicar; nadie más ve esa opción).
+- Añadir proyectos nunca debe romper la maquetación: la distribución se calcula para cualquier cantidad.
 
 ## Accessibility & Inclusion
-Contraste AA, foco visible, navegación por teclado, `prefers-reduced-motion` respetado (la serpiente queda quieta), el contenido es visible sin JavaScript.
+Contraste AA, foco visible, navegación por teclado, `prefers-reduced-motion` respetado (la serpiente queda quieta), el texto de la web es visible sin JavaScript (los proyectos necesitan JS y muestran enlaces alternativos si no carga).

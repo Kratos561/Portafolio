@@ -21,9 +21,13 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19.5v-15M6 10.5l6-6 6 6"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.5 4.8v14.4L19.5 12z"/></symbol>
   <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
   <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.5 4.8v14.4L19.5 12z"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
 </svg>
 
@@ -52,99 +56,20 @@
         <span class="ch" style="--i:0">V</span><span class="ch" style="--i:1">I</span><span class="ch" style="--i:2">D</span><span class="ch" style="--i:3">E</span><span class="ch ch--tall" style="--i:4">O</span><span class="ch" style="--i:5">S</span>
       </span>
       <span class="pill poster__pill poster__pill--tl" aria-hidden="true">Galería de video</span>
-      <span class="pill pill--year poster__pill poster__pill--bl" aria-hidden="true">6 piezas</span>
+      <span class="pill pill--year poster__pill poster__pill--bl" aria-hidden="true" data-count="video">6 piezas</span>
       <span class="pill poster__pill poster__pill--br" aria-hidden="true">Isaac Lorenzo</span>
     </h1>
   </section>
 
-  <!-- VIDEOS: patrón fachada. Para añadir uno, copia un <article class="vcard"> y cambia el ID de YouTube (data-yt, miniatura y enlace). -->
+  <!-- VIDEOS: se cargan de data/projects.json (añádelos desde admin.html) -->
   <section id="videos" class="section" aria-labelledby="videos-title">
     <div class="wrap">
       <div class="sec-head">
         <h2 id="videos-title" class="title">Reel y m<span class="tall">o</span>ntajes</h2>
-        <div class="sec-head__side"><p>Seis piezas publicadas en YouTube.</p></div>
+        <div class="sec-head__side"><p>Comerciales, motion graphics y montajes. Toca cualquiera y se reproduce aquí.</p></div>
       </div>
-      <div class="vgrid vgrid--feature">
-
-        <article class="vcard" id="video-01" data-reveal>
-          <div class="vcard__media">
-            <button class="vplay" type="button" data-yt="N8ENK1se66I" data-title="Milo J - 3 Pecado Despues" aria-label="Reproducir Milo J - 3 Pecado Despues">
-              <img src="https://i.ytimg.com/vi/N8ENK1se66I/hqdefault.jpg" alt="" width="480" height="360" decoding="async" />
-              <span class="vplay__btn"><span><svg class="icon icon--fill" aria-hidden="true"><use href="#i-play"/></svg></span>Reproducir</span>
-            </button>
-          </div>
-          <div class="vcard__meta">
-            <div><span class="pill pill--muted vcard__idx">V01 · Videoclip</span><h3 class="vcard__title">Milo J - 3 Pecado Despues</h3></div>
-            <a class="vcard__yt" href="https://youtu.be/N8ENK1se66I" target="_blank" rel="noopener">YouTube <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-        </article>
-
-        <article class="vcard" id="video-02" data-reveal>
-          <div class="vcard__media">
-            <button class="vplay" type="button" data-yt="qLOa3IcbxlE" data-title="Comercial de Comida" aria-label="Reproducir Comercial de Comida">
-              <img src="https://i.ytimg.com/vi/qLOa3IcbxlE/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async" />
-              <span class="vplay__btn"><span><svg class="icon icon--fill" aria-hidden="true"><use href="#i-play"/></svg></span>Reproducir</span>
-            </button>
-          </div>
-          <div class="vcard__meta">
-            <div><span class="pill pill--muted vcard__idx">V02 · Comercial</span><h3 class="vcard__title">Comercial de Comida</h3></div>
-            <a class="vcard__yt" href="https://youtu.be/qLOa3IcbxlE" target="_blank" rel="noopener">YouTube <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-        </article>
-
-        <article class="vcard" id="video-03" data-reveal>
-          <div class="vcard__media">
-            <button class="vplay" type="button" data-yt="jqgSZ3iCIGY" data-title="Comercial Deportivo" aria-label="Reproducir Comercial Deportivo">
-              <img src="https://i.ytimg.com/vi/jqgSZ3iCIGY/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async" />
-              <span class="vplay__btn"><span><svg class="icon icon--fill" aria-hidden="true"><use href="#i-play"/></svg></span>Reproducir</span>
-            </button>
-          </div>
-          <div class="vcard__meta">
-            <div><span class="pill pill--muted vcard__idx">V03 · Comercial</span><h3 class="vcard__title">Comercial Deportivo</h3></div>
-            <a class="vcard__yt" href="https://youtu.be/jqgSZ3iCIGY" target="_blank" rel="noopener">YouTube <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-        </article>
-
-        <article class="vcard" id="video-04" data-reveal>
-          <div class="vcard__media">
-            <button class="vplay" type="button" data-yt="4--5J4b78jE" data-title="Motion Graphics - Comercial de Nike" aria-label="Reproducir Motion Graphics - Comercial de Nike">
-              <img src="https://i.ytimg.com/vi/4--5J4b78jE/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async" />
-              <span class="vplay__btn"><span><svg class="icon icon--fill" aria-hidden="true"><use href="#i-play"/></svg></span>Reproducir</span>
-            </button>
-          </div>
-          <div class="vcard__meta">
-            <div><span class="pill pill--muted vcard__idx">V04 · Motion graphics</span><h3 class="vcard__title">Motion Graphics - Comercial de Nike</h3></div>
-            <a class="vcard__yt" href="https://youtu.be/4--5J4b78jE" target="_blank" rel="noopener">YouTube <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-        </article>
-
-        <article class="vcard" id="video-05" data-reveal>
-          <div class="vcard__media">
-            <button class="vplay" type="button" data-yt="LELFhmCp2sA" data-title="Animacion de Meta" aria-label="Reproducir Animacion de Meta">
-              <img src="https://i.ytimg.com/vi/LELFhmCp2sA/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async" />
-              <span class="vplay__btn"><span><svg class="icon icon--fill" aria-hidden="true"><use href="#i-play"/></svg></span>Reproducir</span>
-            </button>
-          </div>
-          <div class="vcard__meta">
-            <div><span class="pill pill--muted vcard__idx">V05 · Animación</span><h3 class="vcard__title">Animacion de Meta</h3></div>
-            <a class="vcard__yt" href="https://youtu.be/LELFhmCp2sA" target="_blank" rel="noopener">YouTube <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-        </article>
-
-        <article class="vcard" id="video-06" data-reveal>
-          <div class="vcard__media">
-            <button class="vplay" type="button" data-yt="JmmSd6xWtU4" data-title="Comercial de Nike" aria-label="Reproducir Comercial de Nike">
-              <img src="https://i.ytimg.com/vi/JmmSd6xWtU4/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async" />
-              <span class="vplay__btn"><span><svg class="icon icon--fill" aria-hidden="true"><use href="#i-play"/></svg></span>Reproducir</span>
-            </button>
-          </div>
-          <div class="vcard__meta">
-            <div><span class="pill pill--muted vcard__idx">V06 · Comercial</span><h3 class="vcard__title">Comercial de Nike</h3></div>
-            <a class="vcard__yt" href="https://youtu.be/JmmSd6xWtU4" target="_blank" rel="noopener">YouTube <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
-          </div>
-        </article>
-
-      </div>
+      <div class="filters" data-filters="video" role="group" aria-label="Filtrar por categoría" hidden></div>
+      <div class="works" data-projects="video"><noscript><p class="works-empty">Activa JavaScript para ver los proyectos, o míralos en <a href="https://www.youtube.com/@Ekko-Sound">YouTube</a> y <a href="https://www.artstation.com/isazz_jv">ArtStation</a>.</p></noscript></div>
       <div class="more"><a class="btn" href="https://www.youtube.com/@Ekko-Sound" target="_blank" rel="noopener">Ver el canal completo <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a></div>
     </div>
   </section>
@@ -191,5 +116,6 @@
 </main>
 
 <script src="assets/site.js" defer></script>
+<script src="assets/projects.js" defer></script>
 </body>
 </html>
