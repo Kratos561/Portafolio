@@ -455,7 +455,7 @@
 
       await loadRemote();
       render();
-      toast('Publicado. La web se actualiza para todos en 1–2 minutos.', 'https://github.com/' + OWNER + '/' + REPO + '/commit/' + newCommit.sha);
+      toast('Publicado. Ya está visible en la web para todos.', 'https://github.com/' + OWNER + '/' + REPO + '/commit/' + newCommit.sha);
     } catch (err) {
       toast('No se pudo publicar: ' + (err.status ? friendly(err) : err.message), null, true);
     } finally {

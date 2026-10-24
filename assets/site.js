@@ -56,6 +56,7 @@
   }
   reveal(document.querySelectorAll('[data-reveal]'));
   window.AISAK = { reveal, reduce };
+  try { localStorage.removeItem('aisak:owner'); } catch (_) { /* versiones antiguas mostraban un botón del panel con esta marca */ }
 
   /* ---------- Ticker: duplica el contenido para el bucle ---------- */
   document.querySelectorAll('.ticker__track').forEach((track) => {

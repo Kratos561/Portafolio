@@ -7,10 +7,18 @@
      [data-count="3d" | "video"]                    texto «N piezas»
      img[data-door-bg="3d" | "video"]               fondo de las puertas
    Los proyectos se añaden desde admin.html (panel del propietario).
+   Al instante: en la web publicada los datos se leen de la API de
+   GitHub (cambian en cuanto el panel publica) y, si una imagen nueva
+   aún no está en GitHub Pages, se carga desde raw.githubusercontent.
+   Si la API falla o se agota su límite, se usa data/projects.json.
    ============================================================ */
 (function () {
   'use strict';
   const DATA_URL = 'data/projects.json';
+  const REPO = 'Kratos561/Portafolio';
+  const API_URL = 'https://api.github.com/repos/' + REPO + '/contents/' + DATA_URL + '?ref=main';
+  const RAW_BASE = 'https://raw.githubusercontent.com/' + REPO + '/main/';
+  const isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
   const reveal = (els) => window.AISAK && window.AISAK.reveal(els);
 
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -69,6 +77,13 @@
     '</article>';
   }
 
+  /* Imágenes recién publicadas: si GitHub Pages todavía no las tiene, se piden a raw.githubusercontent */
+  function rawFallback(img) {
+    const src = img.getAttribute('src') || '';
+    if (isLocal || /^(https?:|data:|blob:)/.test(src) || img.dataset.raw) return;
+    img.addEventListener('error', () => { img.dataset.raw = '1'; img.src = RAW_BASE + src.replace(/^\.?\//, ''); }, { once: true });
+  }
+
   /* Miniaturas de YouTube en alta cuando están cerca de la vista */
   const thumbIO = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
     entries.forEach((e) => {
@@ -95,6 +110,7 @@
       const sizes = layout(items.length);
       el.innerHTML = items.map((p, i) => card(p, i, sizes[i], opts.showSection)).join('');
       if (thumbIO) el.querySelectorAll('img[data-yt]').forEach((img) => thumbIO.observe(img));
+      el.querySelectorAll('img:not([data-yt])').forEach(rawFallback);
       reveal(el.querySelectorAll('[data-reveal]'));
     }
 
@@ -172,6 +188,8 @@
       } else {
         stage.innerHTML = '<img class="viewer__img" src="' + esc(p.image.src) + '" alt="' + esc(p.title + (p.description ? ' — ' + p.description : '')) + '" width="' + (p.image.width || '') + '" height="' + (p.image.height || '') + '" />';
       }
+      const vImg = stage.querySelector('img');
+      if (vImg) rawFallback(vImg);
       dlg.querySelector('.viewer__count').textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(list.length).padStart(2, '0');
       dlg.querySelector('.viewer__body').innerHTML =
         (p.category ? '<span class="pill">' + esc(p.category) + '</span>' : '') +
@@ -212,8 +230,18 @@
   const needsData = targets.length || document.querySelector('[data-count],[data-door-bg]');
   if (!needsData) return;
 
-  fetch(DATA_URL, { cache: 'no-cache' })
-    .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  // Petición con tiempo límite; 'no-cache' revalida con ETag (un 304 de GitHub no gasta límite)
+  const getJSON = (url, opts, ms) => {
+    const ctl = 'AbortController' in window ? new AbortController() : null;
+    const timer = ctl ? setTimeout(() => ctl.abort(), ms) : 0;
+    return fetch(url, Object.assign({ cache: 'no-cache', signal: ctl ? ctl.signal : undefined }, opts))
+      .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .finally(() => clearTimeout(timer));
+  };
+  const local = () => getJSON(DATA_URL, {}, 10000);
+  const load = isLocal ? local() : getJSON(API_URL, { headers: { Accept: 'application/vnd.github.raw+json' } }, 4000).catch(local);
+
+  load
     .then((data) => {
       const all = (data.projects || []).filter(valid);
       const bySection = (s) => all.filter((p) => p.section === s);
@@ -233,6 +261,7 @@
         const first = bySection(img.dataset.doorBg)[0];
         if (!first) return;
         img.src = first.section === 'video' ? ytThumb(first.youtube, 'maxresdefault') : first.image.src;
+        rawFallback(img);
       });
 
       // Enlace directo: página.html#ver=id abre el visor

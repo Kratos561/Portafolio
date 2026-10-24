@@ -34,7 +34,12 @@ lleva noindex; solo el dueño la conoce).
      herramientas, etiquetas, enlace externo, "Destacado".
   3. Ordenar con las flechas, destacar con la estrella, editar o borrar.
   4. "Publicar en la web": hace UN commit en main con la imagen y
-     data/projects.json. GitHub Pages actualiza la web en 1–2 minutos.
+     data/projects.json. Se ve AL INSTANTE: la web lee los proyectos de
+     la API de GitHub y, mientras GitHub Pages copia la imagen nueva
+     (≈1 min), la carga desde raw.githubusercontent.com.
+     Límite de la API sin sesión: 60 consultas/hora por visitante (las
+     revalidaciones 304 no cuentan); si se agota, la web usa la copia
+     data/projects.json de GitHub Pages, que llega en ≈1 min.
 La web pública no muestra ningún enlace ni botón al panel: se entra
 escribiendo admin.html en la barra de direcciones.
 Seguridad: el token nunca está en el código; vive solo en el navegador
@@ -120,5 +125,9 @@ Dos SVG (detrás y delante de las letras) redibujados en cada frame:
   tokens en el código.
 - Nuevos títulos de sección: <h2 class="title">...<span class="tall">o</span>...</h2>
 - Responsive: breakpoints al final de styles.css (1000 / 760 / 560 / 380).
+- CACHÉ: GitHub Pages deja CSS/JS 10 min en el navegador. Al cambiar
+  styles.css o cualquier assets/*.js, sube el número ?v=N en TODAS las
+  páginas (index, videos, 3d, admin) para que se descargue de nuevo.
+  Versión actual: ?v=5.
 - Pendiente del dueño: ciudad (fila comentada en .facts de index.html)
   y og:image con URL absoluta.
