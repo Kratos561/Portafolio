@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=block" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=7" />
-<link rel="stylesheet" href="assets/admin.css?v=7" />
+<link rel="stylesheet" href="styles.css?v=8" />
+<link rel="stylesheet" href="assets/admin.css?v=8" />
 </head>
 <body class="admin">
 
@@ -82,12 +82,22 @@
   <p class="ahint" id="tabHint"></p>
   <ol class="alist" id="list" aria-live="polite"></ol>
   <section class="aprofile" id="profileView" aria-label="Tu foto" hidden>
-    <div class="aprofile__frame"><img id="profileImg" src="data:," alt="Vista previa de tu foto tal como se verá en la web" /></div>
+    <div class="aprofile__frame" id="profileFrame">
+      <img id="profileImg" src="data:," alt="Vista previa de tu foto tal como se verá en la web" />
+      <img class="aprofile__logo" id="profileLogo" src="assets/logo-md.png" alt="Vista previa: solo el logo" width="312" height="640" hidden />
+    </div>
     <div class="aprofile__side">
       <h2 class="aprofile__title">Foto de «Sobre mí»</h2>
       <p class="aprofile__lead">Así se verá en la página de inicio. Sube una foto vertical; se convierte a WebP y se reduce a 1400 px de ancho como máximo.</p>
+      <fieldset class="field">
+        <legend>Qué se muestra</legend>
+        <div class="seg">
+          <label><input type="radio" name="photoMode" value="photo" /><span>Foto</span></label>
+          <label><input type="radio" name="photoMode" value="logo" /><span>Solo el logo</span></label>
+        </div>
+      </fieldset>
       <label class="btn btn--red aprofile__pick"><input type="file" id="photoInput" accept="image/png,image/jpeg,image/webp,image/avif" /><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg>Elegir foto nueva</label>
-      <div class="field">
+      <div class="field" id="focusField">
         <label for="focusInput">Encuadre vertical <span id="focusVal"></span></label>
         <input type="range" id="focusInput" min="0" max="100" step="1" />
         <p class="field__note">Arrastra para decidir qué parte de la foto se ve: 0 % arriba, 100 % abajo.</p>
@@ -182,6 +192,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-<script src="assets/admin.js?v=7" defer></script>
+<script src="assets/admin.js?v=8" defer></script>
 </body>
 </html>

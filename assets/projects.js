@@ -609,10 +609,15 @@
         rawFallback(img);
       });
 
-      // Foto de «Sobre mí» (se cambia desde el panel → data.profile.photo)
+      // Foto de «Sobre mí» (se cambia desde el panel → data.profile.photo).
+      // photo.hidden = true → solo el logo (la foto se conserva para poder volver a mostrarla)
       const photo = data.profile && data.profile.photo;
       if (photo) {
+        const logoOnly = photo.hidden === true;
+        document.querySelectorAll('[data-profile-logo]').forEach((el) => { el.hidden = !logoOnly; });
         document.querySelectorAll('img[data-profile-photo]').forEach((img) => {
+          img.hidden = logoOnly;
+          if (logoOnly) return;
           if (photo.src && img.getAttribute('src') !== photo.src) {
             img.src = photo.src;
             if (photo.width && photo.height) { img.width = photo.width; img.height = photo.height; }

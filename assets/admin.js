@@ -251,15 +251,28 @@
   const photoOf = () => Object.assign({}, DEFAULT_PHOTO, (data.profile && data.profile.photo) || {});
   function renderProfile() {
     const ph = photoOf();
+    const logoOnly = ph.hidden === true;
     const pend = pendingImages[ph.src];
     const img = $('#profileImg');
     const src = pend ? pend.url : ph.src;
     if (img.getAttribute('src') !== src) img.src = src;
     img.style.objectPosition = '50% ' + ph.focus + '%';
+    img.hidden = logoOnly;
+    $('#profileLogo').hidden = !logoOnly;
+    $('#profileFrame').classList.toggle('is-logo', logoOnly);
+    document.querySelector('input[name="photoMode"][value="' + (logoOnly ? 'logo' : 'photo') + '"]').checked = true;
+    $('#focusInput').disabled = logoOnly;
+    $('#focusField').classList.toggle('is-off', logoOnly);
     $('#focusInput').value = ph.focus;
     $('#focusVal').textContent = ph.focus + ' %';
-    $('#profileInfo').textContent = (ph.width && ph.height ? ph.width + ' × ' + ph.height + ' px' : '') + (pend ? ' · foto nueva, sin publicar' : '');
+    $('#profileInfo').textContent = logoOnly
+      ? 'En la web se muestra solo el logo. Tu foto se conserva por si quieres volver a mostrarla.'
+      : (ph.width && ph.height ? ph.width + ' × ' + ph.height + ' px' : '') + (pend ? ' · foto nueva, sin publicar' : '');
   }
+  $$('input[name="photoMode"]').forEach((r) => r.addEventListener('change', () => {
+    const logo = r.value === 'logo';
+    setPhoto({ hidden: logo }, logo ? 'muestra solo el logo en «Sobre mí»' : 'muestra la foto en «Sobre mí»');
+  }));
   function setPhoto(patch, msg) {
     data.profile = Object.assign({}, data.profile || {}, { photo: Object.assign(photoOf(), patch) });
     note(msg);
@@ -273,7 +286,7 @@
       const im = await processImage(file, 1400);
       const p = PROFILE_DIR + 'foto-' + Date.now().toString(36) + '.' + im.ext;
       pendingImages[p] = { base64: im.base64, url: im.url };
-      setPhoto({ src: p, width: im.width, height: im.height }, 'cambia la foto');
+      setPhoto({ src: p, width: im.width, height: im.height, hidden: false }, 'cambia la foto');
       toast('Foto lista. Ajusta el encuadre y pulsa «Publicar en la web».');
     } catch (err) {
       $('#profileInfo').textContent = err.message;
