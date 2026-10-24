@@ -15,7 +15,7 @@
   const IMG_DIR = 'assets/projects/';
   const API = 'https://api.github.com';
   const K_TOKEN = 'aisak:token';
-  const K_OWNER = 'aisak:owner';
+  const K_OWNER = 'aisak:owner'; // versiones anteriores lo guardaban; se borra al entrar y al salir
 
   const $ = (s, r) => (r || document).querySelector(s);
   const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
@@ -34,9 +34,10 @@
   /* ---------- Almacenamiento ---------- */
   const store = {
     get() { try { return localStorage.getItem(K_TOKEN) || sessionStorage.getItem(K_TOKEN); } catch (_) { return null; } },
-    set(t, remember, login) {
+    set(t, remember) {
       try {
-        if (remember) { localStorage.setItem(K_TOKEN, t); localStorage.setItem(K_OWNER, login); }
+        localStorage.removeItem(K_OWNER);
+        if (remember) localStorage.setItem(K_TOKEN, t);
         else sessionStorage.setItem(K_TOKEN, t);
       } catch (_) { /* sin almacenamiento: dura lo que la pestaña */ }
     },
@@ -103,7 +104,7 @@
     const repo = await gh(repoPath);
     if (repo.permissions && repo.permissions.push === false) throw new Error('El token no tiene permiso de escritura en el repositorio.');
     await loadRemote();
-    if (remember !== undefined) store.set(t, remember, user.login);
+    if (remember !== undefined) store.set(t, remember);
     showApp(user);
   }
 

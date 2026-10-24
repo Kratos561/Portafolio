@@ -3,7 +3,6 @@
    - Header con fondo al hacer scroll + enlace activo por sección
    - Reveal suave (window.AISAK.reveal para contenido que llega después)
    - Ticker infinito, copiar email, año
-   - Botón «Editar» solo en el navegador del propietario
    - Serpiente roja entrelazada en la palabra-póster [data-snake]
    ============================================================ */
 (function () {
@@ -91,17 +90,6 @@
       }, 2200);
     });
   });
-
-  /* ---------- Propietario: acceso al panel solo si este navegador inició sesión en admin.html ---------- */
-  try {
-    if (localStorage.getItem('aisak:owner')) {
-      const a = document.createElement('a');
-      a.className = 'owner-pill';
-      a.href = 'admin.html';
-      a.innerHTML = '<span class="pill__dot" aria-hidden="true"></span>Editar proyectos';
-      document.body.appendChild(a);
-    }
-  } catch (_) { /* almacenamiento bloqueado: no se muestra nada */ }
 
   /* ============================================================
      SERPIENTE — dos capas SVG (detrás y delante de las letras).

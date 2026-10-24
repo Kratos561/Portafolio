@@ -35,8 +35,8 @@ lleva noindex; solo el dueño la conoce).
   3. Ordenar con las flechas, destacar con la estrella, editar o borrar.
   4. "Publicar en la web": hace UN commit en main con la imagen y
      data/projects.json. GitHub Pages actualiza la web en 1–2 minutos.
-Con "Recordar en este dispositivo", ese navegador muestra un botón
-"Editar proyectos" en la web (nadie más lo ve). "Salir" lo quita.
+La web pública no muestra ningún enlace ni botón al panel: se entra
+escribiendo admin.html en la barra de direcciones.
 Seguridad: el token nunca está en el código; vive solo en el navegador
 del dueño. Si se pierde o filtra, revocarlo en GitHub y crear otro.
 

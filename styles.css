@@ -353,17 +353,6 @@ html.has-viewer { overflow: hidden; }
   .viewer__close { position: fixed; top: .75rem; right: .75rem; z-index: 3; background: rgba(5, 5, 5, .8); }
 }
 
-/* ============ BOTÓN DEL PROPIETARIO (solo en su navegador) ============ */
-.owner-pill {
-  position: fixed; right: 1rem; bottom: 1rem; z-index: 70;
-  display: inline-flex; align-items: center; gap: .55em; padding: .75em 1.05em;
-  border: 1px solid var(--red); border-radius: .6em; background: var(--bg); color: var(--fg);
-  font-weight: 800; font-stretch: 112%; font-size: .78rem; letter-spacing: .06em; text-transform: uppercase;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .55);
-  transition: background .25s var(--ease);
-}
-.owner-pill:hover { background: var(--red); }
-
 /* ============ SERVICIOS ============ */
 .svc-list { border-top: 1px solid var(--line); }
 .svc {
