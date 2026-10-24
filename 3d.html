@@ -1,163 +1,158 @@
 <!DOCTYPE html>
-<html lang="es" class="js-on">
+<html lang="es">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Arte 3D — Isaac Lorenzo / AISAK 3D</title>
-<meta name="description" content="Subpágina Arte 3D de Isaac Lorenzo: objetos, materiales e iluminación." />
-<meta name="theme-color" content="#0A0A0A" />
-<meta name="author" content="Isaac Lorenzo" />
-<link rel="canonical" href="https://aisak3d.example/3d.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arte 3D — Isaac Lorenzo | AISAK 3D</title>
+<meta name="description" content="Arte 3D de Isaac Lorenzo (AISAK 3D): Vintage Optics, Volatile Assets, Red Breath y Weapon environment. Modelado, materiales e iluminación en Blender." />
+<meta name="theme-color" content="#050505" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Isaac Lorenzo — AISAK 3D" />
-<meta property="og:title" content="Arte 3D — Isaac Lorenzo / AISAK 3D" />
-<meta property="og:description" content="Cuatro piezas de 3D: modelado, materiales e iluminación. Destacada: Vintage Optics." />
-<meta property="og:image" content="https://aisak3d.example/assets/3d-vintage-optics.webp" />
-<meta property="og:image:alt" content="Vintage Optics — equipo óptico antiguo renderizado" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" type="image/png" href="assets/logo.png" />
+<meta property="og:title" content="Arte 3D — Isaac Lorenzo" />
+<meta property="og:description" content="Objetos, materiales y luz. Renders de AISAK 3D." />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.cdnfonts.com/css/ethnocentric" />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,300..800&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link href="https://fonts.cdnfonts.com/css/ethnocentric" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=block" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<div class="cursor" id="cursor" aria-hidden="true"><div class="cursor__dot"></div><span class="cursor__label" id="cursorLabel">VER</span></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19.5v-15M6 10.5l6-6 6 6"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+</svg>
+
 <a class="skip-link" href="#main">Saltar al contenido</a>
 
 <header class="hdr" id="hdr">
-  <a href="index.html" class="hdr__mark" aria-label="Volver a principal">
-    <img class="logo logo--header" src="assets/logo.png" alt="Logo AISAK 3D — Isaac Lorenzo" width="176" height="361" />
+  <a class="hdr__mark" href="index.html" aria-label="Isaac Lorenzo — inicio">
+    <img src="assets/logo-sm.png" alt="" width="23" height="46" />
   </a>
-  <nav aria-label="Navegación principal">
+  <nav aria-label="Principal">
     <ul class="hdr__nav">
-      <li><a class="hdr__link" href="index.html#slate"><span class="hdr__idx" aria-hidden="true">01</span>Sobre mí</a></li>
-      <li><a class="hdr__link is-active" href="3d.html"><span class="hdr__idx" aria-hidden="true">02</span>3D</a></li>
-      <li><a class="hdr__link" href="videos.html"><span class="hdr__idx" aria-hidden="true">03</span>Video</a></li>
-      <li><a class="hdr__link" href="index.html#contact"><span class="hdr__idx" aria-hidden="true">04</span>Contacto</a></li>
+      <li><a class="hdr__link" href="index.html#sobre-mi">Sobre mí</a></li>
+      <li><a class="hdr__link is-active" href="3d.html" aria-current="page">3D</a></li>
+      <li><a class="hdr__link" href="videos.html">Video</a></li>
+      <li><a class="hdr__link" href="#contacto">Contacto</a></li>
+      <li><a class="pill hdr__cta" href="#contacto"><span class="pill__dot" aria-hidden="true"></span>Escríbeme</a></li>
     </ul>
   </nav>
 </header>
 
 <main id="main">
-  <section id="top" class="hero hero--sub" aria-labelledby="sub-title">
-    <img class="web web--3dhero" src="assets/web-3dhero.png" alt="" aria-hidden="true" width="1280" height="720" loading="lazy" decoding="async" />
-    <div class="hero__logo"><img class="logo logo--hero" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" /></div>
-    <div class="hero__grid">
-      <h1 id="sub-title" class="hero__name display">
-        <span class="hero__line hero__line--a"><span>ARTE 3D</span></span>
-        <span class="hero__line hero__line--b editorial"><span>objetos y luz</span></span>
-      </h1>
-      <p class="hero__intro">Cuatro piezas de <strong>3D</strong>: modelado, materiales y luz. La destacada es <strong>Vintage Optics</strong> y cada ficha enlaza a su proyecto en ArtStation.</p>
-    </div>
+
+  <section id="top" class="cover cover--sub" aria-labelledby="sub-title">
+    <h1 id="sub-title" class="poster" data-snake style="--poster-w: 2.98" aria-label="Arte 3D">
+      <span class="poster__word" aria-hidden="true">
+        <span class="ch" style="--i:0">A</span><span class="ch" style="--i:1">R</span><span class="ch" style="--i:2">T</span><span class="ch" style="--i:3">E</span><span class="ch ch--space"></span><span class="ch" style="--i:4">3</span><span class="ch ch--tall" style="--i:5">D</span>
+      </span>
+      <span class="pill poster__pill poster__pill--tl" aria-hidden="true">Objetos, materiales y luz</span>
+      <span class="pill pill--year poster__pill poster__pill--bl" aria-hidden="true" data-year>2026</span>
+      <span class="pill poster__pill poster__pill--br" aria-hidden="true">Isaac Lorenzo</span>
+    </h1>
   </section>
 
-  <section id="render" class="chapter has-web" aria-labelledby="render-title">
-    <img class="web web--services" src="assets/web-services.png" alt="" aria-hidden="true" width="1280" height="480" loading="lazy" decoding="async" />
-    <header class="chapter__head">
-      <div>
-        <p class="label label--accent">02 / Render</p>
-        <h2 id="render-title" class="display chapter__title">Objetos <span class="editorial">seleccionados</span></h2>
-        <p class="chapter__desc">Hard-surface de principio a fin: equipo óptico antiguo, munición con volumétricos, un estudio de luz roja y un entorno con armamento.</p>
-      </div>
-      <img class="logo logo--divider chapter__logo" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" />
-    </header>
-
-    <ol class="projects" style="--code:P">
-<article class="project project--bleed" id="project-01" data-reveal data-from="mask">
-      <header class="project__head"><div class="project__index"><span class="label"><span class="project__star" aria-hidden="true">★ </span>ARTE 3D — destacado</span></div><span class="project__tc"><span class="rec">Plano</span><span class="label tc">Nº <span class="project__n"></span></span></span></header>
-      <h2 class="project__title display">Vintage Optics</h2>
-      <figure class="project__media"><img src="assets/3d-vintage-optics.webp" alt="Vintage Optics — colección de equipo óptico antiguo en entorno deteriorado" width="1920" height="1242" loading="lazy" decoding="async" /></figure>
-      <div class="project__body">
-        <dl class="project__meta">
-          <div><dt>Año</dt><dd>2026</dd></div><div><dt>Rol</dt><dd>Modelado / Materiales / Iluminación</dd></div>
-          <div><dt>Herramientas</dt><dd>Blender / Cycles</dd></div><div><dt>Enlace</dt><dd><a href="https://www.artstation.com/artwork/P6lDao" target="_blank" rel="noopener">Ver en ArtStation →</a></dd></div>
-        </dl>
-        <p class="project__desc">Equipo óptico antiguo en un entorno deteriorado. Modelé las piezas desde cero y trabajé el desgaste en los materiales: óxido, polvo y una luz que separa cada objeto.</p>
-      </div>
-      <footer class="project__foot"><a class="project__next" href="#project-02" data-cursor="view"><span class="label">Siguiente</span><span class="project__next-name">02 →</span></a><span class="label">Bleed 21:9</span></footer>
-    </article>
-
-    <article class="project project--split" id="project-02" data-reveal data-from="up">
-      <header class="project__head"><div class="project__index"><span class="label">ARTE 3D</span></div><span class="project__tc"><span class="rec">Plano</span><span class="label tc">Nº <span class="project__n"></span></span></span></header>
-      <div class="project__body">
-        <h2 class="project__title display">Volatile Assets</h2>
-        <dl class="project__meta"><div><dt>Año</dt><dd>2026</dd></div><div><dt>Rol</dt><dd>Modelado / Materiales / Efectos</dd></div><div><dt>Herramientas</dt><dd>Blender / Nodos</dd></div><div><dt>Enlace</dt><dd><a href="https://www.artstation.com/artwork/QK1DOL" target="_blank" rel="noopener">Ver en ArtStation →</a></dd></div></dl>
-        <p class="project__desc">Munición militar con humo y partículas generados por nodos, y materiales pensados para juego y VFX.</p>
-      </div>
-      <figure class="project__media"><img src="assets/3d-volatile-assets.webp" alt="Volatile Assets — munición militar con humo volumétrico" width="1280" height="720" loading="lazy" decoding="async" /></figure>
-      <footer class="project__foot"><a class="project__next" href="#project-03" data-cursor="view"><span class="label">Siguiente</span><span class="project__next-name">03 →</span></a><span class="label">Split 4:5</span></footer>
-    </article>
-
-    <article class="project project--tall" id="project-03" data-reveal data-from="up">
-      <header class="project__head"><div class="project__index"><span class="label">ARTE 3D</span></div><span class="project__tc"><span class="rec">Plano</span><span class="label tc">Nº <span class="project__n"></span></span></span></header>
-      <figure class="project__media"><img src="assets/3d-red-breath.webp" alt="Red Breath — render con luz roja volumétrica" width="1920" height="1080" loading="lazy" decoding="async" /></figure>
-      <div class="project__body">
-        <h2 class="project__title display">Red Breath</h2>
-        <dl class="project__meta"><div><dt>Año</dt><dd>2026</dd></div><div><dt>Herramientas</dt><dd>Blender / Cycles</dd></div><div><dt>Enlace</dt><dd><a href="https://www.artstation.com/artwork/5WNVmW" target="_blank" rel="noopener">Ver en ArtStation →</a></dd></div></dl>
-        <p class="project__desc">Estudio de luz roja volumétrica sobre el material, presentado en formato alto.</p>
-      </div>
-      <footer class="project__foot"><a class="project__next" href="#project-04" data-cursor="view"><span class="label">Siguiente</span><span class="project__next-name">04 →</span></a><span class="label">Tall 2:3</span></footer>
-    </article>
-
-    <article class="project project--type-first" id="project-04" data-reveal data-from="up">
-      <header class="project__head"><div class="project__index"><span class="label">ARTE 3D</span></div><span class="project__tc"><span class="rec">Plano</span><span class="label tc">Nº <span class="project__n"></span></span></span></header>
-      <div class="project__body">
-        <h2 class="project__title display">Weapon environment</h2>
-        <p class="project__desc">Entorno con armamento. La composición y la luz están pensadas para mostrar los activos en contexto.</p>
-        <dl class="project__meta"><div><dt>Año</dt><dd>2026</dd></div><div><dt>Herramientas</dt><dd>Blender / Cycles</dd></div><div><dt>Enlace</dt><dd><a href="https://www.artstation.com/artwork/y4dyB9" target="_blank" rel="noopener">Ver en ArtStation →</a></dd></div></dl>
-      </div>
-      <figure class="project__media"><img src="assets/3d-weapon-environment.webp" alt="Weapon environment — entorno 3D con armamento" width="1920" height="1080" loading="lazy" decoding="async" /></figure>
-      <footer class="project__foot"><a class="project__next" href="videos.html" data-cursor="view"><span class="label">Siguiente</span><span class="project__next-name">Video →</span></a><span class="label">Type 16:9</span></footer>
-    </article>
-  </ol>
-  </section>
-
-  <section id="contact" class="contact has-web" aria-labelledby="contact-title">
-    <img class="web web--contact" src="assets/web-contact.png" alt="" aria-hidden="true" width="640" height="640" loading="lazy" decoding="async" />
-    <p class="label label--accent">Contacto</p>
-    <div class="contact__head">
-      <h2 id="contact-title" class="contact__title display">¿Hacemos<br /><span class="editorial">algo en 3D?</span></h2>
-      <img class="logo logo--contact" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" />
-    </div>
-    <a class="contact__cta" href="mailto:hello@isaaclorenzo.example" data-cursor="open"><span>Escríbeme</span><span class="contact__arrow" aria-hidden="true">→</span></a>
-    <div class="page-actions"><a class="btn" href="index.html">← Principal</a><a class="btn" href="videos.html">Ver videos →</a></div>
-    <footer class="foot" data-reveal data-from="up">
-      <div class="foot__top">
-        <a class="foot__brand" href="#top" aria-label="Isaac Lorenzo — volver arriba">
-          <img class="foot__logo" src="assets/logo.png" alt="" aria-hidden="true" width="176" height="361" />
-          <span>Isaac Lorenzo <i>— AISAK 3D</i></span>
-        </a>
-        <nav class="foot__nav" aria-label="Secciones">
-          <span class="label label--accent">Secciones</span>
-          <a href="index.html">Principal</a>
-          <a href="index.html#slate">Sobre mí</a>
-          <a href="videos.html">Videos</a>
-          <a href="index.html#contact">Contacto</a>
-        </nav>
-        <div class="foot__contact">
-          <span class="label label--accent">Contacto</span>
-          <a href="mailto:hello@isaaclorenzo.example">hello@isaaclorenzo.example</a>
-          <a href="https://www.artstation.com/isazz_jv" target="_blank" rel="noopener">ArtStation →</a>
-          <a href="https://www.youtube.com/@Ekko-Sound" target="_blank" rel="noopener">YouTube →</a>
+  <section id="renders" class="section" aria-labelledby="renders-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="renders-title" class="title">C<span class="tall">o</span>lección</h2>
+        <div class="sec-head__side">
+          <p>Cuatro piezas modeladas, texturizadas e iluminadas en Blender.</p>
+          <a class="btn" href="https://www.artstation.com/isazz_jv" target="_blank" rel="noopener">Perfil en ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
         </div>
       </div>
-      <div class="foot__bottom">
-        <span>© <span id="year"></span> Isaac Lorenzo</span>
-        <span class="label">Arte 3D / subpágina 02</span>
-        <a class="foot__top-btn" href="#top" data-cursor="view">Volver arriba ↑</a>
+
+      <!-- Para añadir una pieza: copia un <article class="frame">, cambia la imagen (con su width/height reales),
+           el título, la descripción, las píldoras y el enlace. frame--wide ocupa todo el ancho. -->
+      <div class="frames">
+        <article class="frame frame--wide" id="pieza-01" data-reveal>
+          <div class="frame__box"><img src="assets/3d-vintage-optics.webp" alt="Vintage Optics — colección de equipo óptico antiguo en un entorno deteriorado" width="1920" height="1242" decoding="async" /></div>
+          <div class="frame__meta">
+            <h3>Vintage Optics</h3>
+            <a class="vcard__yt" href="https://www.artstation.com/artwork/P6lDao" target="_blank" rel="noopener">ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
+          </div>
+          <p class="frame__desc">Equipo óptico antiguo en un entorno deteriorado. Modelé las piezas desde cero y trabajé el desgaste en los materiales: óxido, polvo y una luz que separa cada objeto.</p>
+          <ul class="frame__tags"><li class="pill">Destacada</li><li class="pill pill--muted">2026</li><li class="pill pill--muted">Blender · Cycles</li><li class="pill pill--muted">Modelado · Materiales · Luz</li></ul>
+        </article>
+
+        <article class="frame" id="pieza-02" data-reveal>
+          <div class="frame__box"><img src="assets/3d-volatile-assets.webp" alt="Volatile Assets — munición militar con humo volumétrico" width="1280" height="720" loading="lazy" decoding="async" /></div>
+          <div class="frame__meta">
+            <h3>Volatile Assets</h3>
+            <a class="vcard__yt" href="https://www.artstation.com/artwork/QK1DOL" target="_blank" rel="noopener">ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
+          </div>
+          <p class="frame__desc">Munición militar con humo y partículas generados por nodos, y materiales pensados para juego y VFX.</p>
+          <ul class="frame__tags"><li class="pill pill--muted">2026</li><li class="pill pill--muted">Blender · Nodos</li></ul>
+        </article>
+
+        <article class="frame" id="pieza-03" data-reveal>
+          <div class="frame__box"><img src="assets/3d-red-breath.webp" alt="Red Breath — render con luz roja volumétrica" width="1920" height="1080" loading="lazy" decoding="async" /></div>
+          <div class="frame__meta">
+            <h3>Red Breath</h3>
+            <a class="vcard__yt" href="https://www.artstation.com/artwork/5WNVmW" target="_blank" rel="noopener">ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
+          </div>
+          <p class="frame__desc">Estudio de luz roja volumétrica sobre el material.</p>
+          <ul class="frame__tags"><li class="pill pill--muted">2026</li><li class="pill pill--muted">Blender · Cycles</li></ul>
+        </article>
+
+        <article class="frame frame--wide" id="pieza-04" data-reveal>
+          <div class="frame__box"><img src="assets/3d-weapon-environment.webp" alt="Weapon environment — entorno 3D con armamento" width="1920" height="1080" loading="lazy" decoding="async" /></div>
+          <div class="frame__meta">
+            <h3>Weapon environment</h3>
+            <a class="vcard__yt" href="https://www.artstation.com/artwork/y4dyB9" target="_blank" rel="noopener">ArtStation <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(abre en una pestaña nueva)</span></a>
+          </div>
+          <p class="frame__desc">Entorno con armamento. La composición y la luz están pensadas para mostrar los activos en contexto.</p>
+          <ul class="frame__tags"><li class="pill pill--muted">2026</li><li class="pill pill--muted">Blender · Cycles</li></ul>
+        </article>
       </div>
-    </footer>
+    </div>
   </section>
+
+  <section id="contacto" class="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <h2 id="contact-title" class="contact__title">Hablem<span class="tall">o</span>s</h2>
+      <div class="contact__body">
+        <span class="pill"><span class="pill__dot" aria-hidden="true"></span>Disponible para encargos</span>
+        <p>¿Tienes un objeto que mostrar? Cuéntame la idea y lo llevamos a render.</p>
+        <div class="mail">
+          <a class="mail__link" href="mailto:isaacjhovanni@gmail.com">isaacjhovanni@gmail.com</a>
+          <button class="copy" type="button" data-copy="isaacjhovanni@gmail.com"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span data-copy-label aria-live="polite">Copiar</span></button>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn--red" href="mailto:isaacjhovanni@gmail.com?subject=Pieza%203D%20para%20Isaac">Escribir email <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn" href="videos.html">Ver videos</a>
+        </div>
+      </div>
+      <footer class="foot">
+        <div class="foot__top">
+          <a class="foot__brand" href="#top"><img src="assets/logo-sm.png" alt="" width="20" height="40" /><span>Isaac Lorenzo <span>· AISAK 3D</span></span></a>
+          <div class="foot__cols">
+            <nav class="foot__col" aria-label="Secciones">
+              <h2>Secciones</h2>
+              <a href="index.html">Inicio</a><a href="index.html#sobre-mi">Sobre mí</a><a href="videos.html">Videos</a><a href="#contacto">Contacto</a>
+            </nav>
+            <div class="foot__col">
+              <h2>Contacto</h2>
+              <a href="mailto:isaacjhovanni@gmail.com">isaacjhovanni@gmail.com</a>
+              <a href="https://www.youtube.com/@Ekko-Sound" target="_blank" rel="noopener">YouTube</a>
+              <a href="https://www.artstation.com/isazz_jv" target="_blank" rel="noopener">ArtStation</a>
+            </div>
+          </div>
+        </div>
+        <div class="foot__bottom">
+          <span>© <span data-year>2026</span> Isaac Lorenzo · 3D artist &amp; video editor</span>
+          <a class="foot__up" href="#top">Volver arriba <svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></a>
+        </div>
+      </footer>
+    </div>
+  </section>
+
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="assets/animations.js"></script>
-<script src="assets/site.js"></script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>
