@@ -97,6 +97,50 @@
     });
   });
 
+  /* ---------- Currículum: los enlaces [data-cv] abren el CV dentro de la web ----------
+     Sin JS, el enlace abre el PDF directamente. Enlace directo: página.html#cv */
+  const CV = { img: 'assets/cv/isaac-lorenzo-cv.webp', pdf: 'assets/cv/isaac-lorenzo-cv.pdf', w: 1240, h: 1860 };
+  let cvDlg = null, cvOpener = null;
+  function openCV(from) {
+    if (!cvDlg) {
+      cvDlg = document.createElement('dialog');
+      cvDlg.className = 'cvview';
+      cvDlg.setAttribute('aria-labelledby', 'cv-title');
+      cvDlg.innerHTML =
+        '<div class="cvview__bar">' +
+          '<h2 id="cv-title" class="cvview__title">Currícul<span class="tall">u</span>m</h2>' +
+          '<div class="cvview__actions">' +
+            '<a class="btn btn--red" href="' + CV.pdf + '" download="Isaac-Lorenzo-CV.pdf"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span class="cvview__long">Descargar </span>PDF</a>' +
+            '<button type="button" class="viewer__close cvview__close" data-cv-close aria-label="Cerrar"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cvview__page"><img src="' + CV.img + '" alt="Currículum de Isaac Lorenzo: experiencia, educación, habilidades y contacto" width="' + CV.w + '" height="' + CV.h + '" decoding="async" /></div>';
+      document.body.appendChild(cvDlg);
+      cvDlg.addEventListener('click', (e) => {
+        if (e.target.closest('[data-cv-close]') || e.target === cvDlg) cvDlg.close();
+      });
+      cvDlg.addEventListener('close', () => {
+        document.documentElement.classList.remove('has-viewer');
+        if (location.hash === '#cv') { try { history.replaceState(null, '', location.pathname + location.search); } catch (_) { /* file:// */ } }
+        if (cvOpener && document.contains(cvOpener)) cvOpener.focus({ preventScroll: true });
+      });
+    }
+    cvOpener = from || null;
+    document.documentElement.classList.add('has-viewer');
+    cvDlg.showModal();
+    cvDlg.scrollTop = 0;
+    cvDlg.querySelector('[data-cv-close]').focus();
+  }
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-cv]');
+    if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    openCV(a);
+  });
+  const cvFromHash = () => { if (location.hash === '#cv' && document.querySelector('a[data-cv]') && !(cvDlg && cvDlg.open)) openCV(null); };
+  cvFromHash();
+  window.addEventListener('hashchange', cvFromHash);
+
   /* ============================================================
      SERPIENTE — dos capas SVG (detrás y delante de las letras).
      La capa delantera se recorta sobre algunas letras, así la

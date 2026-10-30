@@ -142,8 +142,12 @@ Dos SVG (detrás y delante de las letras) redibujados en cada frame:
 - CACHÉ: GitHub Pages deja CSS/JS 10 min en el navegador. Al cambiar
   styles.css o cualquier assets/*.js, sube el número ?v=N en TODAS las
   páginas (index, videos, 3d, admin) para que se descargue de nuevo.
-  Versión actual: ?v=11.
+  Versión actual: ?v=14.
 - Pendiente del dueño: ciudad (fila comentada en .facts de index.html).
+- CV: assets/cv/isaac-lorenzo-cv.pdf (original) + isaac-lorenzo-cv.webp
+  (render 1240x1860 que se ve dentro de la web). Enlaces [data-cv] en menú,
+  «Sobre mí» y footer; el visor está en site.js. Enlace directo: /#cv.
+  Para actualizarlo: sustituye el PDF y vuelve a renderizar la imagen.
 - Compartir: assets/og-portada.jpg (1200x630, captura de la portada
   PORTAFOLIO) en og:image de las 3 páginas. Si cambia la portada, vuelve
   a capturarla a 1200x630 y cambia el nombre del archivo (WhatsApp y
